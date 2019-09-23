@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+$primary-color: #BC1C14;
+$primary-dark-color: #B3150D;
+$corner-normal: 3px;
+
+$app-header-background: $primary-color;
+$user-menu-hover-background: $primary-dark-color;
+$user-menu-background: $primary-dark-color;
+$button-corner: $corner-normal;
+
+@import "~junte-ui/lib/assets/styles/common";
+@import "~junte-ui/lib/assets/styles/components";
+

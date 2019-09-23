@@ -1,0 +1,14 @@
+@import "~junte-ui/lib/assets/styles/variables";
+
+:host {
+  display: block;
+}
+
+[logo] {
+  font-style: italic;
+  font-size: $font-size-large;
+}
+
+[welcome] {
+  font-size: 26px;
+}
