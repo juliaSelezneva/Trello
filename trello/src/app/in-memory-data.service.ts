@@ -1,17 +1,18 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Injectable } from '@angular/core';
-import { ListComponent } from './list/list.component';
+import { List } from './list/list';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class InMemoryDataService implements InMemoryDbService {
+  list: List;
   createDb() {
     const lists = [
-      { title: 'Issue' },
-      { title: 'Doing' },
-      { title: 'Done'}
+      new List('Issue'),
+      new List('Doing'),
+      new List('Done'),
     ];
     return {lists};
   }

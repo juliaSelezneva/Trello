@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { List } from './list/list';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ListComponent } from './list/list.component';
+import { List } from './list/list';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +15,12 @@ export class ListService {
 
   private listsUrl = 'api/lists';
 
-  getLists(): Observable<ListComponent[]> {
-    return this.http.get<ListComponent[]>(this.listsUrl);
+  getLists(): Observable<List[]> {
+    return this.http.get<List[]>(this.listsUrl);
   }
 
-  addList(list: List): Observable<ListComponent> {
-    return this.http.post<ListComponent>(this.listsUrl, list, this.httpOptions);
+  addList(list: List): Observable<List> {
+    return this.http.post<List>(this.listsUrl, list, this.httpOptions);
   }
 
   constructor(private http: HttpClient) {

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
 import { ListComponent } from '../list/list.component';
+import { List } from '../list/list';
 
 @Component({
   selector: 'app-canban',
@@ -17,7 +18,7 @@ export class CanbanComponent implements OnInit {
     title: [null],
   });
 
-  lists: ListComponent[];
+  lists: List[];
 
   getLists(): void {
     this.listService.getLists()
@@ -29,7 +30,7 @@ export class CanbanComponent implements OnInit {
     if (!title) {
       return;
     }
-    this.listService.addList({ title } as ListComponent)
+    this.listService.addList({ title } as List)
       .subscribe(list => {
         this.lists.push(list);
       });
