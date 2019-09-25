@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { List } from './list/list';
-import { ListComponent } from './list/list.component';
 
 @Injectable({
   providedIn: 'root',

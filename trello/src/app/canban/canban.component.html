@@ -1,8 +1,13 @@
 <jnt-stack [type]="ui.stack.type.horizontal">
   <app-list *ngFor="let list of lists" [title]="list.title"></app-list>
-  <jnt-form [formGroup]="listForm">
-    <jnt-input #input formControlName="title" placeholder="List title"></jnt-input>
-    <jnt-button [icon]="ui.icons.font.plus" [type]="ui.form.button.type.submit" text="Add list" (click)="add('123')"></jnt-button>
-  </jnt-form>
+  <div new-list>
+    <jnt-button text="Add list" [icon]="ui.icons.font.plus" [width]="ui.width.fluid" add></jnt-button>
+    <jnt-form [formGroup]="listForm" (submitted)="add()" form>
+      <jnt-stack>
+        <jnt-input #input formControlName="title" placeholder="List title"></jnt-input>
+        <jnt-button [icon]="ui.icons.font.plus" [type]="ui.form.button.type.submit" text="Add list"></jnt-button>
+      </jnt-stack>
+    </jnt-form>
+  </div>
 </jnt-stack>
 

@@ -6,12 +6,23 @@
   border-radius: $corner-small;
   background-color: $primary-color-light-70;
   padding: $gutter-normal;
-  min-width: 300px;
-  width: 300px;
+  min-width: 250px;
+  width: 250px;
   box-sizing: border-box;
-  cursor: pointer;
   transition: background-color .3s;
   outline: 0;
+}
+
+[input] {
+  border: 1px solid transparent;
+  background-color: transparent;
+  border-radius: $corner-small;
+  width: 100%;
+  cursor: pointer;
+  &:focus {
+    border-color: $red;
+    outline: 0;
+  }
 }
 
 
