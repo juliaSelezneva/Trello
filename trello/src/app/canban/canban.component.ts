@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChildren, OnInit, QueryList } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
-import { ListComponent } from '../list/list.component';
 import { List } from '../list/list';
+import { ListComponent } from '../list/list.component';
 
 @Component({
   selector: 'app-canban',
@@ -35,11 +35,6 @@ export class CanbanComponent implements OnInit {
         this.lists.push(list);
       });
   }
-
-  // addList() {
-  //   this.lists.push({title: this.listForm.controls['title'].value});
-  //   console.log(this.listForm.controls['title'].value);
-  // }
 
   constructor(private fb: FormBuilder, private listService: ListService) {
   }
