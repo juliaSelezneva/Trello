@@ -5,6 +5,19 @@
   display: block;
 }
 
+[new-ticket] {
+  [add].editTicket {
+    display: none;
+    & + [form] {
+      display: block;
+    }
+  }
+  [form] {
+    padding: $gutter-normal;
+    display: none;
+  }
+}
+
 [new-list] {
   border-radius: $corner-small;
   background-color: $primary-color-light;

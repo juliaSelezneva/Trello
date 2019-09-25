@@ -17,7 +17,12 @@ export class CanbanComponent implements OnInit {
     title: [null],
   });
 
+  ticketForm = this.fb.group({
+    content: [null],
+  });
+
   active = false;
+  edit = false;
 
   lists: List[];
 
