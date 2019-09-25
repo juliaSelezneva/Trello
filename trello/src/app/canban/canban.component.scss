@@ -8,14 +8,20 @@
 [new-list] {
   border-radius: $corner-small;
   background-color: $primary-color-light;
-  padding: $gutter-normal;
   min-width: 250px;
   width: 250px;
   box-sizing: border-box;
   cursor: pointer;
   transition: background-color .3s;
   outline: 0;
+  [add].edit {
+    display: none;
+    & + [form] {
+      display: block;
+    }
+  }
   [form] {
+    padding: $gutter-normal;
     display: none;
   }
 }
