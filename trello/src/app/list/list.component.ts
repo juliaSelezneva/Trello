@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { UI } from 'junte-ui';
 
 @Component({
   selector: 'app-list',
@@ -6,8 +7,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 
-export class ListComponent {
+export class ListComponent  {
+
+  ui = UI;
 
   @Input() title: string;
-
 }

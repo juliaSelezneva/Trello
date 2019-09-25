@@ -1,5 +1,7 @@
 <jnt-stack [type]="ui.stack.type.horizontal">
-  <app-list *ngFor="let list of lists" [title]="list.title"></app-list>
+  <app-list *ngFor="let list of lists" [title]="list.title">
+    <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content"></app-ticket>
+  </app-list>
   <div new-list>
     <jnt-button text="Add list" [icon]="ui.icons.font.plus" [width]="ui.width.fluid" add (click)="active = !active" [class.edit]="active"></jnt-button>
     <jnt-form [formGroup]="listForm" (submitted)="add()" form>

@@ -4,9 +4,9 @@ import { CanbanComponent } from './canban/canban.component';
 import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/lists', pathMatch: 'full'},
-  { path: 'lists', component: CanbanComponent },
-  { path: 'lists/:id', component: ListComponent },
+  { path: '', redirectTo: '/canban', pathMatch: 'full'},
+  { path: 'canban', component: CanbanComponent },
+  { path: 'canban/:id', component: ListComponent },
 ];
 
 @NgModule({

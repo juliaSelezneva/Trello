@@ -9,9 +9,9 @@ import { List } from './list/list';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const lists = [
-      { id: 11, title: 'Issue' },
-      { id: 12, title: 'Doing' },
-      { id: 13, title: 'Done'}
+      { id: 11, title: 'Issue', tickets: [{id: 1, content: 'ticket1'}, {id: 2, content: 'ticket2'}] },
+      { id: 12, title: 'Doing', tickets: [{id: 1, content: 'ticket3'}] },
+      { id: 13, title: 'Done' }
     ];
     return {lists};
   }
