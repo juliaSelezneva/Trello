@@ -1,8 +1,7 @@
 <jnt-stack [type]="ui.stack.type.horizontal">
   <app-list *ngFor="let list of lists" [title]="list.title">
     <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content"></app-ticket>
-    {{list.mode}}
-    <jnt-button *ngIf="list.mode == (mode.view || ''); else editTicket"
+    <jnt-button *ngIf="list.mode == mode.view; else editTicket"
                 text="Add ticket"
                 [width]="ui.width.fluid"
                 [icon]="ui.icons.font.plus"

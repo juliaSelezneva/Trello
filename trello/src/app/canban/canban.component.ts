@@ -49,6 +49,7 @@ export class CanbanComponent implements OnInit {
         this.lists.push(list);
       });
     this.listForm.reset();
+    console.log(this.lists);
   }
 
   ngOnInit() {
