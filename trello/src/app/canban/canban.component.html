@@ -1,32 +1,59 @@
 <jnt-stack [type]="ui.stack.type.horizontal">
   <app-list *ngFor="let list of lists" [title]="list.title">
     <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content"></app-ticket>
-    <div new-ticket>
-      <jnt-button text="Add ticket" [icon]="ui.icons.font.plus" [size]="ui.sizes.small"
-                  [scheme]="ui.schemes.secondary" add (click)="edit = !edit" [class.editTicket]="edit"></jnt-button>
-      <jnt-form [formGroup]="ticketForm" form>
+    {{list.mode}}
+    <jnt-button *ngIf="list.mode == (mode.view || ''); else editTicket"
+                text="Add ticket"
+                [width]="ui.width.fluid"
+                [icon]="ui.icons.font.plus"
+                [size]="ui.sizes.small"
+                [scheme]="ui.schemes.secondary"
+                (click)="list.mode = mode.edit"></jnt-button>
+
+    <ng-template #editTicket>
+      <jnt-form [formGroup]="ticketForm">
         <jnt-stack>
-          <jnt-input #input formControlName="content" placeholder="Ticket content"></jnt-input>
+          <jnt-input formControlName="content" placeholder="Ticket content"></jnt-input>
           <jnt-stack [type]="ui.stack.type.horizontal">
-            <jnt-button [icon]="ui.icons.font.plus" [type]="ui.form.button.type.submit" text="Add ticket"></jnt-button>
-            <jnt-button [outline]="ui.outline.transparent" [icon]="ui.icons.font.close" [scheme]="ui.schemes.secondary"
-                        (click)="edit = !edit"></jnt-button>
+            <jnt-button [icon]="ui.icons.font.plus"
+                        [type]="ui.form.button.type.submit"
+                        text="Add ticket">
+            </jnt-button>
+            <jnt-button [outline]="ui.outline.transparent"
+                        [icon]="ui.icons.font.close"
+                        [scheme]="ui.schemes.secondary"
+                        (click)="list.mode = mode.view">
+            </jnt-button>
           </jnt-stack>
         </jnt-stack>
       </jnt-form>
-    </div>
+    </ng-template>
   </app-list>
-  <div new-list>
-    <jnt-button text="Add list" [icon]="ui.icons.font.plus" [width]="ui.width.fluid" add (click)="active = !active" [class.edit]="active"></jnt-button>
+  <jnt-button *ngIf="modelist == mode.view; else editList"
+              text="Add list"
+              [icon]="ui.icons.font.plus"
+              [width]="ui.width.fluid"
+              (click)="modelist = mode.edit" add>
+  </jnt-button>
+
+  <ng-template #editList>
     <jnt-form [formGroup]="listForm" (submitted)="add()" form>
       <jnt-stack>
-        <jnt-input #input formControlName="title" placeholder="List title"></jnt-input>
+        <jnt-input formControlName="title" placeholder="List title"></jnt-input>
         <jnt-stack [type]="ui.stack.type.horizontal">
-          <jnt-button [icon]="ui.icons.font.plus" [type]="ui.form.button.type.submit" text="Add list"></jnt-button>
-          <jnt-button [outline]="ui.outline.transparent" [icon]="ui.icons.font.close" [scheme]="ui.schemes.secondary" (click)="active = !active"></jnt-button>
+          <jnt-button [icon]="ui.icons.font.plus"
+                      [type]="ui.form.button.type.submit"
+                      text="Add list">
+          </jnt-button>
+          <jnt-button [outline]="ui.outline.transparent"
+                      [icon]="ui.icons.font.close"
+                      [scheme]="ui.schemes.secondary"
+                      (click)="modelist = mode.view">
+          </jnt-button>
         </jnt-stack>
       </jnt-stack>
     </jnt-form>
-  </div>
+  </ng-template>
+
 </jnt-stack>
 

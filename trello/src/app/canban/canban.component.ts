@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChildren, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
-import { List, Ticket } from '../list/list';
+import { List } from '../list/list';
+import { Mode } from '../modes-enum';
+import { ListComponent } from '../list/list.component';
 
 @Component({
   selector: 'app-canban',
@@ -21,8 +23,10 @@ export class CanbanComponent implements OnInit {
     content: [null],
   });
 
-  active = false;
-  edit = false;
+  @ViewChildren(ListComponent) listComp: QueryList<ListComponent>;
+
+  mode = Mode;
+  modelist = this.mode.view;
 
   lists: List[];
 
