@@ -22,7 +22,6 @@ export class ListService {
   addList(list: List): Observable<List> {
     return this.http.post<List>(this.listsUrl, list, this.httpOptions);
   }
-
   constructor(private http: HttpClient) {
   }
 

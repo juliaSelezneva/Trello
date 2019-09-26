@@ -36,7 +36,7 @@
   </jnt-button>
 
   <ng-template #editList>
-    <jnt-form [formGroup]="listForm" (submitted)="add()" form>
+    <jnt-form [formGroup]="listForm" (submitted)="addList()" form>
       <jnt-stack>
         <jnt-input formControlName="title" placeholder="List title"></jnt-input>
         <jnt-stack [type]="ui.stack.type.horizontal">

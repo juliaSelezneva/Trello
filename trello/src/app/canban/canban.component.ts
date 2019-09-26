@@ -38,7 +38,7 @@ export class CanbanComponent implements OnInit {
       .subscribe(lists => this.lists = lists);
   }
 
-  add(): void {
+  addList(): void {
     const title = this.listForm.controls['title'].value;
     if (!title) {
       return;

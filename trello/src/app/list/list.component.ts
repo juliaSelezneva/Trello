@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { UI } from 'junte-ui';
-import { List } from './list';
 
 @Component({
   selector: 'app-list',
