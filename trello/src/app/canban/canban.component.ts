@@ -2,7 +2,7 @@ import { Component, ContentChildren, OnInit, QueryList, ViewChildren } from '@an
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
-import { List } from '../list/list';
+import { List, Ticket } from '../list/list';
 import { Mode } from '../modes-enum';
 import { ListComponent } from '../list/list.component';
 
@@ -26,7 +26,7 @@ export class CanbanComponent implements OnInit {
   @ViewChildren(ListComponent) listComp: QueryList<ListComponent>;
 
   mode = Mode;
-  modelist = this.mode.view;
+  listmode = this.mode.view;
 
   lists: List[];
 
@@ -44,12 +44,26 @@ export class CanbanComponent implements OnInit {
       return;
     }
     title.trim();
-    this.listService.addList({title} as List)
+    this.listService.addList(new List(title))
       .subscribe(list => {
         this.lists.push(list);
       });
     this.listForm.reset();
-    console.log(this.lists);
+  }
+
+  addTicket(idlist: number): void {
+    const content = this.ticketForm.controls['content'].value;
+    if (!content) {
+      return;
+    }
+    content.trim();
+    this.listService.addTicket(new Ticket(content))
+      .subscribe(ticket => {
+        const findlist = this.lists.find(list => list.id === idlist);
+        findlist.tickets.push(ticket);
+        findlist.mode = this.mode.view;
+      });
+    this.ticketForm.reset();
   }
 
   ngOnInit() {

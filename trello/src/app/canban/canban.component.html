@@ -10,7 +10,7 @@
                 (click)="list.mode = mode.edit"></jnt-button>
 
     <ng-template #editTicket>
-      <jnt-form [formGroup]="ticketForm">
+      <jnt-form [formGroup]="ticketForm" (submitted)="addTicket(list.id)">
         <jnt-stack>
           <jnt-input formControlName="content" placeholder="Ticket content"></jnt-input>
           <jnt-stack [type]="ui.stack.type.horizontal">
@@ -21,18 +21,18 @@
             <jnt-button [outline]="ui.outline.transparent"
                         [icon]="ui.icons.font.close"
                         [scheme]="ui.schemes.secondary"
-                        (click)="list.mode = mode.view">
+                        (click)="list.mode = mode.view; this.ticketForm.reset()">
             </jnt-button>
           </jnt-stack>
         </jnt-stack>
       </jnt-form>
     </ng-template>
   </app-list>
-  <jnt-button *ngIf="modelist == mode.view; else editList"
+  <jnt-button *ngIf="listmode == mode.view; else editList"
               text="Add list"
               [icon]="ui.icons.font.plus"
               [width]="ui.width.fluid"
-              (click)="modelist = mode.edit" add>
+              (click)="listmode = mode.edit" add>
   </jnt-button>
 
   <ng-template #editList>
@@ -47,7 +47,7 @@
           <jnt-button [outline]="ui.outline.transparent"
                       [icon]="ui.icons.font.close"
                       [scheme]="ui.schemes.secondary"
-                      (click)="modelist = mode.view">
+                      (click)="listmode = mode.view; this.listForm.reset()">
           </jnt-button>
         </jnt-stack>
       </jnt-stack>
