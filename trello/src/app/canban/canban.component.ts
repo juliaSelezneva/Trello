@@ -1,12 +1,10 @@
-import { Component, ContentChildren, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, ContentChildren, ElementRef, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
 import { List, Ticket } from '../list/list';
 import { Mode } from '../modes-enum';
-import { ListComponent } from '../list/list.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-canban',
@@ -25,12 +23,11 @@ export class CanbanComponent implements OnInit {
     content: [null],
   });
 
-  @ViewChildren(ListComponent) listComp: QueryList<ListComponent>;
-
   mode = Mode;
   listmode = this.mode.view;
 
   lists: List[];
+  tickets: Ticket[];
 
   constructor(private fb: FormBuilder, private listService: ListService) {
   }
@@ -50,6 +47,7 @@ export class CanbanComponent implements OnInit {
       .subscribe(list => {
         this.lists.push(list);
       });
+    console.log(this.lists);
     this.listForm.reset();
   }
 
@@ -68,14 +66,21 @@ export class CanbanComponent implements OnInit {
     this.ticketForm.reset();
   }
 
-  // @Output('cdkDropDropped')
-  dropped(event: CdkDragDrop<string[]>) {
+  droppedList(event: CdkDragDrop<string[]>) {
     moveItemInArray(
       this.lists,
       event.previousIndex,
       event.currentIndex
     );
-    console.log(this.lists);
+    console.log(this.lists.findIndex(list => list.id === 11));
+  }
+
+  droppedTicket(event: CdkDragDrop<string[]>, idlist) {
+    moveItemInArray(
+      this.lists[this.lists.findIndex(list => list.id === idlist)].tickets,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
   ngOnInit() {
