@@ -1,10 +1,12 @@
-import { Component, ContentChildren, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ContentChildren, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
 import { List, Ticket } from '../list/list';
 import { Mode } from '../modes-enum';
 import { ListComponent } from '../list/list.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-canban',
@@ -64,6 +66,16 @@ export class CanbanComponent implements OnInit {
         findlist.mode = this.mode.view;
       });
     this.ticketForm.reset();
+  }
+
+  // @Output('cdkDropDropped')
+  dropped(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.lists,
+      event.previousIndex,
+      event.currentIndex
+    );
+    console.log(this.lists);
   }
 
   ngOnInit() {

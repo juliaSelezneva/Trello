@@ -1,5 +1,5 @@
-<jnt-stack [type]="ui.stack.type.horizontal">
-  <app-list *ngFor="let list of lists" [title]="list.title">
+<jnt-stack cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropped($event)" [type]="ui.stack.type.horizontal">
+  <app-list *ngFor="let list of lists" [title]="list.title" cdkDrag>
     <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content"></app-ticket>
     <jnt-button *ngIf="list.mode == mode.view; else editTicket"
                 text="Add ticket"
@@ -28,7 +28,8 @@
       </jnt-form>
     </ng-template>
   </app-list>
-  <jnt-button *ngIf="listmode == mode.view; else editList"
+
+<jnt-button *ngIf="listmode == mode.view; else editList"
               text="Add list"
               [icon]="ui.icons.font.plus"
               [width]="ui.width.fluid"

@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { TicketComponent } from './ticket/ticket.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TicketComponent } from './ticket/ticket.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DragDropModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
