@@ -1,3 +1,6 @@
-<input [(ngModel)]="title" input>
+<jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between">
+  <input [(ngModel)]="title" input>
+  <ng-container *ngTemplateOutlet="actions"></ng-container>
+</jnt-stack>
 <ng-content></ng-content>
 

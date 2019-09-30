@@ -1,15 +1,21 @@
 <jnt-stack cdkDropListGroup [type]="ui.stack.type.horizontal">
   <app-list *ngFor="let list of lists" [title]="list.title">
-    <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny">
+    <ng-template #actions *ngIf="list.tickets.length">
       <jnt-button [icon]="ui.icons.font.arrowLeft"
                   [outline]="ui.outline.ghost"
                   [size]="ui.sizes.tiny"
                   [scheme]="ui.schemes.secondary"
                   up
-                  (click)="sortUp(list.tickets)">
+                  (click)="list.tickets | sortUp">
       </jnt-button>
-      <jnt-button [icon]="ui.icons.font.arrowLeft" [outline]="ui.outline.ghost" [size]="ui.sizes.tiny" [scheme]="ui.schemes.secondary" down></jnt-button>
-    </jnt-stack>
+      <jnt-button [icon]="ui.icons.font.arrowLeft"
+                  [outline]="ui.outline.ghost"
+                  [size]="ui.sizes.tiny"
+                  [scheme]="ui.schemes.secondary"
+                  down
+                  (click)="list.tickets.sort(compareDown)">
+      </jnt-button>
+    </ng-template>
     <jnt-stack [align]="ui.flex.align.stretch"
                tickets
                 cdkDropList

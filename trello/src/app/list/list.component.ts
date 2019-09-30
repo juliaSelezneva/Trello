@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 import { UI } from 'junte-ui';
 
 @Component({
@@ -12,5 +12,8 @@ export class ListComponent {
   ui = UI;
 
   @Input() title: string;
+
+  @ContentChild('actions', {static: false})
+  actions: TemplateRef<any>;
 
 }
