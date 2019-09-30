@@ -1,9 +1,22 @@
 <jnt-stack cdkDropListGroup [type]="ui.stack.type.horizontal">
-  <app-list *ngFor="let list of lists" [title]="list.title"
-            cdkDropList
-            [cdkDropListData]="list.tickets"
-            (cdkDropListDropped)="droppedTicket($event, list.id)">
-    <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content" cdkDrag></app-ticket>
+  <app-list *ngFor="let list of lists" [title]="list.title">
+    <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny">
+      <jnt-button [icon]="ui.icons.font.arrowLeft"
+                  [outline]="ui.outline.ghost"
+                  [size]="ui.sizes.tiny"
+                  [scheme]="ui.schemes.secondary"
+                  up
+                  (click)="sortUp(list.tickets)">
+      </jnt-button>
+      <jnt-button [icon]="ui.icons.font.arrowLeft" [outline]="ui.outline.ghost" [size]="ui.sizes.tiny" [scheme]="ui.schemes.secondary" down></jnt-button>
+    </jnt-stack>
+    <jnt-stack [align]="ui.flex.align.stretch"
+               tickets
+                cdkDropList
+               [cdkDropListData]="list.tickets"
+               (cdkDropListDropped)="droppedTicket($event, list.id)">
+      <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content" cdkDrag></app-ticket>
+    </jnt-stack>
     <jnt-button *ngIf="list.mode == mode.view; else editTicket"
                 text="Add ticket"
                 [width]="ui.width.fluid"

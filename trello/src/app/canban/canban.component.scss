@@ -9,6 +9,26 @@
   max-width: 250px;
 }
 
+[tickets] {
+  min-height: $gutter-normal;
+  margin: $gutter-normal 0;
+  &:empty {
+    margin: 0;
+  }
+}
+
+[up] {
+  ::ng-deep jnt-icon[host=#{$jnt-icon-host}] {
+    transform: rotate(90deg);
+  }
+}
+
+[down] {
+  ::ng-deep jnt-icon[host=#{$jnt-icon-host}] {
+    transform: rotate(-90deg);
+  }
+}
+
 [form] {
   padding: $gutter-normal;
   border-radius: $corner-small;

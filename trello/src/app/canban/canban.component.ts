@@ -64,14 +64,6 @@ export class CanbanComponent implements OnInit {
     this.ticketForm.reset();
   }
 
-  droppedList(event: CdkDragDrop<string[]>) {
-    moveItemInArray(
-      this.lists,
-      event.previousIndex,
-      event.currentIndex
-    );
-  }
-
   droppedTicket(event: CdkDragDrop<string[]>, idlist) {
     if (event.previousContainer === event.container) {
       moveItemInArray(

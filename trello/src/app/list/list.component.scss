@@ -3,6 +3,7 @@
 
 :host {
   display: inline-flex;
+  flex-direction: column;
   border-radius: $corner-small;
   background-color: $primary-color-light-70;
   padding: $gutter-normal;

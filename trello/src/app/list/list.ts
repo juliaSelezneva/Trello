@@ -17,8 +17,10 @@ export class List {
 export class Ticket {
   id?: number;
   content: string;
+
   constructor(content, id = null) {
     this.id = id;
     this.content = content;
   }
 }
+
