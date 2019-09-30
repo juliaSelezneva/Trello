@@ -6,7 +6,7 @@
                   [size]="ui.sizes.tiny"
                   [scheme]="ui.schemes.secondary"
                   up
-                  (click)="list.tickets | sortUp">
+                  (click)="list.tickets.sort(compareUp)">
       </jnt-button>
       <jnt-button [icon]="ui.icons.font.arrowLeft"
                   [outline]="ui.outline.ghost"

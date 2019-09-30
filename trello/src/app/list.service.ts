@@ -14,7 +14,6 @@ export class ListService {
   };
 
   private listsUrl = 'api/lists';
-
   getLists(): Observable<List[]> {
     return this.http.get<List[]>(this.listsUrl);
   }

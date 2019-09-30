@@ -4,7 +4,6 @@ import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
 import { List, Ticket } from '../list/list';
 import { Mode } from '../modes-enum';
-import { SortUpPipe } from './sort-pipe';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -81,16 +80,16 @@ export class CanbanComponent implements OnInit {
       );
     }
   }
-  //
-  // compareUp(a, b) {
-  //   if (a.content < b.content) {
-  //     return -1;
-  //   }
-  //   if (a.content > b.content) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // }
+
+  compareUp(a, b) {
+    if (a.content < b.content) {
+      return -1;
+    }
+    if (a.content > b.content) {
+      return 1;
+    }
+    return 0;
+  }
 
 
   compareDown(a, b) {
