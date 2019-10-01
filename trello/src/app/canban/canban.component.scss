@@ -17,6 +17,10 @@
   }
 }
 
+[footerModal] {
+  padding: $gutter-small;
+}
+
 [up] {
   ::ng-deep jnt-icon[host=#{$jnt-icon-host}] {
     transform: rotate(90deg);

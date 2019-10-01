@@ -17,10 +17,15 @@ export class List {
 export class Ticket {
   id?: number;
   content: string;
+  due_date?: Date;
+  estimate?: number;
+  list_id?: number;
 
-  constructor(content, id = null) {
+  constructor(content, id = null, due_date = null, estimate = null) {
     this.id = id;
     this.content = content;
+    this.due_date = due_date;
+    this.estimate = estimate;
   }
 }
 

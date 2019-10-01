@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
 import { UI } from 'junte-ui';
 
 @Component({
@@ -11,6 +11,9 @@ export class TicketComponent implements OnInit {
   ui = UI;
 
   @Input() content: string;
+
+  @ContentChild('actionsTicket', {static: false})
+  actionsTicket: TemplateRef<any>;
 
   constructor() {
   }

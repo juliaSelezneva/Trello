@@ -13,7 +13,7 @@ export class ListComponent {
 
   @Input() title: string;
 
-  @ContentChild('actions', {static: false})
-  actions: TemplateRef<any>;
+  @ContentChild('actionsList', {static: false})
+  actionsList: TemplateRef<any>;
 
 }
