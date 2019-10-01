@@ -1,27 +1,29 @@
 <jnt-stack cdkDropListGroup [type]="ui.stack.type.horizontal">
   <app-list *ngFor="let list of lists" [title]="list.title">
-    <ng-template #actionsList *ngIf="list.tickets.length > 1">
+    <ng-template #actionsList>
+      <!--*ngIf="tickets[list.id].length > 1"-->
       <jnt-button [icon]="ui.icons.font.arrowLeft"
                   [outline]="ui.outline.ghost"
                   [size]="ui.sizes.tiny"
                   [scheme]="ui.schemes.secondary"
                   up
-                  (click)="list.tickets.sort(compareUp)">
+                  (click)="tickets.sort(compareUp)">
       </jnt-button>
       <jnt-button [icon]="ui.icons.font.arrowLeft"
                   [outline]="ui.outline.ghost"
                   [size]="ui.sizes.tiny"
                   [scheme]="ui.schemes.secondary"
                   down
-                  (click)="list.tickets.sort(compareDown)">
+                  (click)="tickets.sort(compareDown)">
       </jnt-button>
     </ng-template>
+    {{list.id}}
     <jnt-stack [align]="ui.flex.align.stretch"
                tickets
                 cdkDropList
-               [cdkDropListData]="list.tickets"
-               (cdkDropListDropped)="droppedTicket($event, list.id)">
-      <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content" cdkDrag #currentTicket>
+               [cdkDropListData]="tickets"
+               (cdkDropListDropped)="droppedTicket($event)">
+      <app-ticket *ngFor="let ticket of tickets" [content]="ticket.content" cdkDrag>
         <ng-template #actionsTicket>
           <jnt-button [size]="ui.sizes.tiny" [icon]="ui.icons.font.edit" [outline]="ui.outline.transparent" (click)="openModal()"></jnt-button>
         </ng-template>
