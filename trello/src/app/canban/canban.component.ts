@@ -7,6 +7,7 @@ import { Mode } from '../modes-enum';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ListComponent } from '../list/list.component';
 import { TicketComponent } from '../ticket/ticket.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-canban',
@@ -22,8 +23,6 @@ export class CanbanComponent implements OnInit {
 
   @ViewChild('footer', {static: false})
   footer: TemplateRef<any>;
-
-  @ViewChild('currentTicket', {static: false}) currentTicket: TicketComponent;
 
   listForm = this.fb.group({
     title: [null],
@@ -41,15 +40,20 @@ export class CanbanComponent implements OnInit {
   listmode = this.mode.view;
 
   lists: List[];
+  tickets: Ticket[];
 
   constructor(private fb: FormBuilder,
               private listService: ListService,
-              private modalService: ModalService) {
+              private modalService: ModalService,
+              private router: Router) {
   }
 
   getLists(): void {
     this.listService.getLists()
-      .subscribe(lists => this.lists = lists);
+      .subscribe(lists => {
+        console.log(lists);
+        this.lists = lists;
+      });
   }
 
   addList(): void {

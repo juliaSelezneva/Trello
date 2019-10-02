@@ -14,8 +14,15 @@ export class ListService {
   };
 
   private listsUrl = 'api/lists';
+  private ticketsUrl = 'api/tickets';
+
   getLists(): Observable<List[]> {
     return this.http.get<List[]>(this.listsUrl);
+  }
+
+  getTicket(id: number): Observable<Ticket> {
+    const url = `${this.ticketsUrl}/${id}`;
+    return this.http.get<Ticket>(url);
   }
 
   addList(list: List): Observable<List> {

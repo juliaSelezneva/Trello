@@ -1,6 +1,7 @@
 <jnt-block [padding]="ui.padding.small" [width]="ui.width.fluid">
   <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between">
-    <div>{{content}}</div>
+    <!--<div>{{title}}</div>-->
+    <jnt-link [title]="title" [source]="source"></jnt-link>
     <ng-container *ngTemplateOutlet="actionsTicket"></ng-container>
   </jnt-stack>
 <ng-content></ng-content>

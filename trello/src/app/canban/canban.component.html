@@ -21,9 +21,9 @@
                 cdkDropList
                [cdkDropListData]="list.tickets"
                (cdkDropListDropped)="droppedTicket($event, list.id)">
-      <app-ticket *ngFor="let ticket of list.tickets" [content]="ticket.content" cdkDrag #currentTicket>
+      <app-ticket *ngFor="let ticket of list.tickets" [title]="ticket.title" [source]="['/tickets/', ticket.id]" cdkDrag>
         <ng-template #actionsTicket>
-          <jnt-button [size]="ui.sizes.tiny" [icon]="ui.icons.font.edit" [outline]="ui.outline.transparent" (click)="openModal()"></jnt-button>
+          <jnt-button [size]="ui.sizes.tiny" [scheme]="ui.schemes.secondary" [icon]="ui.icons.font.edit" [outline]="ui.outline.transparent" (click)="openModal()"></jnt-button>
         </ng-template>
       </app-ticket>
       <ng-template #contentModal>

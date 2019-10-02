@@ -12,13 +12,15 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { TicketComponent } from './ticket/ticket.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CanbanComponent,
     ListComponent,
-    TicketComponent
+    TicketComponent,
+    TicketDetailComponent
   ],
   imports: [
     BrowserModule,
