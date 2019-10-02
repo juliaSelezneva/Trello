@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Injectable } from '@angular/core';
-import { List, Ticket } from './list/list';
+import { List } from './list/list';
 
 @Injectable({
   providedIn: 'root',
@@ -9,18 +9,11 @@ import { List, Ticket } from './list/list';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const lists = [
-      new List('Issue', 11),
-      new List('Doing', 12),
-      new List('Done', 13),
+      new List('Issue', [{id: 1, content: 'Create canban component'}, {id: 2, content: 'Refactor components'}], 11),
+      new List('Doing', [{id: 1, content: 'Implement list'}, {id: 2, content: 'Add ticket in list'}, {id: 3, content: 'Sort tickets'}], 12),
+      new List('Done', [], 13),
     ];
-    const tickets = [
-      new Ticket('Create canban component', 11, 1),
-      new Ticket('Refactor components', 11, 2),
-      new Ticket('Implement list', 12, 3),
-      new Ticket('Add ticket in list', 12, 4),
-      new Ticket('Sort tickets', 12, 5)
-    ];
-    return {lists, tickets};
+    return {lists};
   }
 
   genId(lists: List[]): number {
