@@ -33,14 +33,14 @@ export class CanbanComponent implements OnInit {
   });
 
   modalForm = this.fb.group({
-    estimate: [null],
+    title: [null],
   });
 
   mode = Mode;
   listmode = this.mode.view;
 
   lists: List[];
-  tickets: Ticket[];
+  ticket: Ticket;
 
   constructor(private fb: FormBuilder,
               private listService: ListService,
@@ -50,10 +50,7 @@ export class CanbanComponent implements OnInit {
 
   getLists(): void {
     this.listService.getLists()
-      .subscribe(lists => {
-        console.log(lists);
-        this.lists = lists;
-      });
+      .subscribe(lists => this.lists = lists);
   }
 
   addList(): void {
@@ -85,11 +82,17 @@ export class CanbanComponent implements OnInit {
   }
 
   updateTicket(ticket: Ticket) {
-    const estimate = this.ticketForm.controls['estimate'].value;
-    if (!estimate) {
+    // const title = this.modalForm.controls['estimate'].value;
+    const title = '123';
+    console.log(title);
+    console.log(ticket);
+    if (!title) {
       return;
     }
-    estimate.trim();
+    title.trim();
+    ticket.title = title;
+    this.listService.updateTicket(ticket)
+      .subscribe(t => ticket.title = t);
   }
 
 
@@ -111,10 +114,10 @@ export class CanbanComponent implements OnInit {
   }
 
   compareUp(a, b) {
-    if (a.content < b.content) {
+    if (a.title < b.title) {
       return -1;
     }
-    if (a.content > b.content) {
+    if (a.title > b.title) {
       return 1;
     }
     return 0;
@@ -122,10 +125,10 @@ export class CanbanComponent implements OnInit {
 
 
   compareDown(a, b) {
-    if (a.content > b.content) {
+    if (a.title > b.title) {
       return -1;
     }
-    if (a.content < b.content) {
+    if (a.title < b.title) {
       return 1;
     }
     return 0;

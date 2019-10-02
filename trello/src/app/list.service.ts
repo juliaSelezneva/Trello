@@ -33,7 +33,8 @@ export class ListService {
     return this.http.post<Ticket>(this.listsUrl, ticket, this.httpOptions);
   }
 
-  updateTicket(ticket: Ticket): Observable<Ticket> {
+  updateTicket(ticket: Ticket): Observable<any> {
+    debugger;
     return this.http.put<Ticket>(this.listsUrl, ticket, this.httpOptions);
   }
 

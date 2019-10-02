@@ -27,8 +27,8 @@
         </ng-template>
       </app-ticket>
       <ng-template #contentModal>
-        <jnt-form [formGroup]="modalForm" (submitted)="updateTicket(list.tickets[ticket.id])">
-          <jnt-input formControlName="estimate" placeholder="Estimate"></jnt-input>
+        <jnt-form [formGroup]="modalForm" (submitted)="updateTicket(ticket)">
+          <jnt-input formControlName="title" placeholder="Title"></jnt-input>
           <jnt-button text="Ok" [type]="ui.form.button.type.submit"></jnt-button>
         </jnt-form>
       </ng-template>
