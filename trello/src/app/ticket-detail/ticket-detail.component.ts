@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ListService } from '../list.service';
 import { ActivatedRoute } from '@angular/router';
-import { Ticket } from '../list/list';
+import { Ticket } from '../list/list.models';
 import { UI } from 'junte-ui';
 
 @Component({

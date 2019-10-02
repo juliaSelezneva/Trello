@@ -3,10 +3,10 @@ import { Mode } from '../modes-enum';
 export class List {
   id?: number;
   title: string;
-  mode?: Mode;
-  tickets?: Ticket[];
+  tickets: Ticket[];
+  mode: Mode;
 
-  constructor(title, tickets = [], id = null, mode = Mode.view) {
+  constructor(title: string, tickets: Ticket[] = [], id: number = null, mode: Mode = Mode.view) {
     this.id = id;
     this.title = title;
     this.tickets = tickets;

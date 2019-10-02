@@ -1,6 +1,56 @@
 <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between">
   <input [(ngModel)]="title" input>
-  <ng-container *ngTemplateOutlet="actionsList"></ng-container>
+  <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.stack.gutter.tiny"
+             *ngIf="list.tickets.length > 1">
+    <jnt-button [icon]="ui.icons.font.arrowLeft"
+                [outline]="ui.outline.ghost"
+                [size]="ui.sizes.tiny"
+                [scheme]="ui.schemes.secondary"
+                up
+                (click)="list.tickets.sort(compareUp)">
+    </jnt-button>
+    <jnt-button [icon]="ui.icons.font.arrowLeft"
+                [outline]="ui.outline.ghost"
+                [size]="ui.sizes.tiny"
+                [scheme]="ui.schemes.secondary"
+                down
+                (click)="list.tickets.sort(compareDown)">
+    </jnt-button>
+  </jnt-stack>
 </jnt-stack>
-<ng-content></ng-content>
+
+<jnt-stack [align]="ui.flex.align.stretch" *ngIf="!!list"
+           tickets
+           cdkDropList
+           [cdkDropListData]="list.tickets"
+           (cdkDropListDropped)="droppedTicket($event)">
+  <app-ticket *ngFor="let ticket of list.tickets" [ticket]="ticket" cdkDrag></app-ticket>
+</jnt-stack>
+
+<jnt-button *ngIf="list.mode == mode.view; else editTicket"
+            text="Add ticket"
+            [width]="ui.width.fluid"
+            [icon]="ui.icons.font.plus"
+            [size]="ui.sizes.small"
+            [scheme]="ui.schemes.secondary"
+            (click)="list.mode = mode.edit"></jnt-button>
+
+<ng-template #editTicket>
+  <jnt-form [formGroup]="ticketForm" (submitted)="addTicket()">
+    <jnt-stack>
+      <jnt-input formControlName="title" placeholder="Ticket content"></jnt-input>
+      <jnt-stack [type]="ui.stack.type.horizontal">
+        <jnt-button [icon]="ui.icons.font.plus"
+                    [type]="ui.form.button.type.submit"
+                    text="Add ticket">
+        </jnt-button>
+        <jnt-button [outline]="ui.outline.transparent"
+                    [icon]="ui.icons.font.close"
+                    [scheme]="ui.schemes.secondary"
+                    (click)="list.mode = mode.view; this.ticketForm.reset()">
+        </jnt-button>
+      </jnt-stack>
+    </jnt-stack>
+  </jnt-form>
+</ng-template>
 

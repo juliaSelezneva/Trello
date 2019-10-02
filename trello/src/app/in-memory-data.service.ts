@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Injectable } from '@angular/core';
-import { List, Ticket } from './list/list';
+import { List, Ticket } from './list/list.models';
 
 @Injectable({
   providedIn: 'root',

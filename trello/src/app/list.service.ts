@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { List, Ticket } from './list/list';
+import { List, Ticket } from './list/list.models';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +34,6 @@ export class ListService {
   }
 
   updateTicket(ticket: Ticket): Observable<any> {
-    debugger;
     return this.http.put<Ticket>(this.listsUrl, ticket, this.httpOptions);
   }
 
