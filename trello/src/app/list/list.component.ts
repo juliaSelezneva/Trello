@@ -1,5 +1,5 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { UI } from 'junte-ui';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ModalOptions, ModalService, UI } from 'junte-ui';
 import { List, Ticket } from './list.models';
 import { Mode } from '../modes-enum';
 import { FormBuilder } from '@angular/forms';
@@ -15,7 +15,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 export class ListComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
-              private listService: ListService) {
+              private listService: ListService,
+              private modalService: ModalService) {
   }
 
   ui = UI;
@@ -24,7 +25,17 @@ export class ListComponent implements OnInit {
   @Input() list: List;
   mode = Mode;
 
+  @ViewChild('contentModal', {static: false})
+  contentModal: TemplateRef<any>;
+
+  @ViewChild('footerModal', {static: false})
+  footerModal: TemplateRef<any>;
+
   ticketForm = this.fb.group({
+    title: [null],
+  });
+
+  modalForm = this.fb.group({
     title: [null],
   });
 
@@ -58,6 +69,16 @@ export class ListComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  openModal() {
+    const options = new ModalOptions({
+      title: {
+        text: 'Edit ticket',
+      },
+      maxWidth: '800px'
+    });
+    this.modalService.open(this.contentModal, this.footerModal, options);
   }
 
   compareUp(a, b) {
