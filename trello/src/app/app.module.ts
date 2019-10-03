@@ -13,6 +13,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { TicketComponent } from './ticket/ticket.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { EditTicketComponent } from './ticket/edit-ticket/edit-ticket.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
     CanbanComponent,
     ListComponent,
     TicketComponent,
-    TicketDetailComponent
+    TicketDetailComponent,
+    EditTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,9 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
+  ],
+  entryComponents: [
+    EditTicketComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

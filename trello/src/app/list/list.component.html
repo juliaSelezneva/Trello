@@ -24,25 +24,7 @@
            cdkDropList
            [cdkDropListData]="list.tickets"
            (cdkDropListDropped)="droppedTicket($event)">
-  <app-ticket *ngFor="let ticket of list.tickets" [ticket]="ticket" cdkDrag>
-    <ng-template #actionsTicket>
-      <jnt-button [size]="ui.sizes.tiny" [scheme]="ui.schemes.secondary" [icon]="ui.icons.font.edit"
-                  [outline]="ui.outline.transparent" (click)="openModal()">
-      </jnt-button>
-      <ng-template #contentModal>
-        <jnt-form [formGroup]="modalForm" (submitted)="updateTicket(ticket)">
-          <jnt-input formControlName="title" placeholder="Title"></jnt-input>
-        </jnt-form>
-      </ng-template>
-
-      <ng-template #footerModal>
-        <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.center" footerModal>
-          <jnt-button text="Ok" [type]="ui.form.button.type.submit"></jnt-button>
-          <jnt-button text="Cancel"></jnt-button>
-        </jnt-stack>
-      </ng-template>
-    </ng-template>
-  </app-ticket>
+  <app-ticket *ngFor="let ticket of list.tickets" [ticket]="ticket" cdkDrag></app-ticket>
 </jnt-stack>
 
 <jnt-button *ngIf="list.mode == mode.view; else editTicket"

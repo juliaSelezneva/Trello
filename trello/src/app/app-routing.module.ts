@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/canban', pathMatch: 'full'},
   { path: 'canban', component: CanbanComponent },
   { path: 'tickets/:id', component: TicketDetailComponent },
+  { path: '**', redirectTo: '/canban' }
 ];
 
 @NgModule({

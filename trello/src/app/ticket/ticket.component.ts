@@ -1,9 +1,8 @@
-import { Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Colors, LabelComponent, UI } from 'junte-ui';
-import { List, Ticket } from '../list/list.models';
-import { ListService } from '../list.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ComponentFactoryResolver, ContentChild, Injector, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ModalOptions, ModalService, UI } from 'junte-ui';
+import { Ticket } from '../list/list.models';
 import { Label } from '../enum';
+import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
 
 @Component({
   selector: 'app-ticket',
@@ -11,6 +10,10 @@ import { Label } from '../enum';
   styleUrls: ['./ticket.component.scss']
 })
 export class TicketComponent implements OnInit {
+
+  constructor(private modalService: ModalService,
+              private injector: Injector,
+              private cfr: ComponentFactoryResolver) {}
 
   ui = UI;
 
@@ -22,6 +25,23 @@ export class TicketComponent implements OnInit {
 
   @ContentChild('actionsTicket', {static: false})
   actionsTicket: TemplateRef<any>;
+
+  @ViewChild('footerModal', {static: false})
+  footerModal: TemplateRef<any>;
+
+  openModal() {
+    const component = this.cfr.resolveComponentFactory(EditTicketComponent).create(this.injector);
+    component.instance.title = this.ticket.title;
+    const options = new ModalOptions({
+      title: {
+        text: 'Edit ticket',
+        icon: UI.icons.font.edit
+      },
+      maxHeight: '1024px',
+      maxWidth: '400px'
+    });
+    this.modalService.open(component, this.footerModal, options);
+  }
 
   ngOnInit() {
   }
