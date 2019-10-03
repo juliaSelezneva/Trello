@@ -20,7 +20,6 @@ export class ListComponent implements OnInit {
 
   ui = UI;
 
-  @Input() title: string;
   @Input() list: List;
   mode = Mode;
 

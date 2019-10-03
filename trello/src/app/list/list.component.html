@@ -1,7 +1,7 @@
 <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between">
-  <input [(ngModel)]="title" input>
+  <input [(ngModel)]="list.title" input>
   <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.stack.gutter.tiny"
-             *ngIf="list.tickets.length > 1">
+             *ngIf="!!list.tickets && list.tickets.length > 1">
     <jnt-button [icon]="ui.icons.font.arrowLeft"
                 [outline]="ui.outline.ghost"
                 [size]="ui.sizes.tiny"
