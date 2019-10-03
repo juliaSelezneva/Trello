@@ -1,10 +1,10 @@
-import { Mode } from '../modes-enum';
+import { Label, Mode } from '../enum';
 
 export class List {
   id?: number;
   title: string;
-  tickets: Ticket[];
-  mode: Mode;
+  tickets?: Ticket[];
+  mode?: Mode;
 
   constructor(title: string, tickets: Ticket[] = [], id: number = null, mode: Mode = Mode.view) {
     this.id = id;
@@ -17,14 +17,16 @@ export class List {
 export class Ticket {
   id?: number;
   title: string;
-  due_date?: Date;
-  estimate?: number;
+  dueDate?: Date;
+  estimate?: string;
+  labels?: Label[];
 
-  constructor(title, id = null, estimate = null, due_date = null) {
+  constructor(title, id = null, dueDate = null, estimate = null, labels: Label[] = null) {
     this.id = id;
     this.title = title;
-    this.due_date = due_date;
+    this.dueDate = dueDate;
     this.estimate = estimate;
+    this.labels = labels;
   }
 }
 

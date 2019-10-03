@@ -1,4 +1,16 @@
+@import "../../assets/styles/variables";
+@import "~junte-ui/lib/assets/styles/variables";
+
 :host {
   display: block;
   cursor: move;
+}
+
+[dueDate], [estimate] {
+  color: $primary-text-light-color;
+  font-size: $font-size-small;
+}
+
+[label] {
+  align-self: flex-start;
 }

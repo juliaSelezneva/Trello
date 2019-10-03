@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ModalOptions, ModalService, UI } from 'junte-ui';
 import { List, Ticket } from './list.models';
-import { Mode } from '../modes-enum';
+import { Mode } from '../enum';
 import { FormBuilder } from '@angular/forms';
 import { ListService } from '../list.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';

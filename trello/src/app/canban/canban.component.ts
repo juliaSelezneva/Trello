@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../list.service';
 import { List, Ticket } from '../list/list.models';
-import { Mode } from '../modes-enum';
+import { Mode } from '../enum';
 
 @Component({
   selector: 'app-canban',

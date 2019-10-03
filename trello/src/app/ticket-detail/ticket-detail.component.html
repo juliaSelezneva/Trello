@@ -1,3 +1,8 @@
 <jnt-block *ngIf="ticket" [padding]="ui.padding.normal">
-  <div>{{ticket.title}}</div>
+  <jnt-stack [type]="ui.stack.type.horizontal">
+    <div>{{ticket.title}}</div>
+    <div>{{ticket.estimate}}</div>
+    <div>{{ticket.dueDate | date: 'd MMM'}}</div>
+  </jnt-stack>
+
 </jnt-block>

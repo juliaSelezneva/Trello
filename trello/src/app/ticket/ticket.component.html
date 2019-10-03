@@ -1,6 +1,25 @@
 <jnt-block *ngIf="!!ticket" [padding]="ui.padding.small" [width]="ui.width.fluid">
-  <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between">
-    <jnt-link [title]="ticket.title" [source]="['/tickets/', ticket.id]"></jnt-link>
-    <ng-container *ngTemplateOutlet="actionsTicket"></ng-container>
+  <jnt-stack [gutter]="ui.stack.gutter.small" [align]="ui.flex.align.stretch">
+    <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between">
+      <jnt-link [title]="ticket.title" [source]="['/tickets/', ticket.id]"></jnt-link>
+      <ng-container *ngTemplateOutlet="actionsTicket"></ng-container>
+    </jnt-stack>
+
+    <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny">
+      <jnt-label *ngFor="let label of ticket.labels" [label]="label" [color]="ui.colors.greenDark"></jnt-label>
+    </jnt-stack>
+
+    <jnt-stack [type]="ui.stack.type.horizontal" [align]="ui.flex.align.center">
+      <div *ngIf="ticket.dueDate" dueDate>
+        <jnt-icon [icon]="ui.icons.font.calendar"></jnt-icon>
+        {{ticket.dueDate | date: 'd MMM'}}
+      </div>
+      <div *ngIf="ticket.estimate" estimate>
+        <jnt-icon [icon]="ui.icons.font.time"></jnt-icon>
+        {{ticket.estimate}}
+      </div>
+    </jnt-stack>
+
   </jnt-stack>
+
 </jnt-block>
