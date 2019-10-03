@@ -2,16 +2,9 @@
   <jnt-stack [gutter]="ui.stack.gutter.small" [align]="ui.flex.align.stretch">
     <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between">
       <jnt-link [title]="ticket.title" [source]="['/tickets/', ticket.id]"></jnt-link>
-      <!--<ng-container *ngTemplateOutlet="actionsTicket"></ng-container>-->
         <jnt-button [size]="ui.sizes.tiny" [scheme]="ui.schemes.secondary" [icon]="ui.icons.font.edit"
                     [outline]="ui.outline.transparent" (click)="openModal()">
         </jnt-button>
-        <ng-template #footerModal>
-          <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.center" footerModal>
-            <jnt-button text="Ok" [type]="ui.form.button.type.submit"></jnt-button>
-            <jnt-button text="Cancel"></jnt-button>
-          </jnt-stack>
-        </ng-template>
     </jnt-stack>
 
     <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny">

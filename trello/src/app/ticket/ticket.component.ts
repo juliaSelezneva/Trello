@@ -13,7 +13,8 @@ export class TicketComponent implements OnInit {
 
   constructor(private modalService: ModalService,
               private injector: Injector,
-              private cfr: ComponentFactoryResolver) {}
+              private cfr: ComponentFactoryResolver) {
+  }
 
   ui = UI;
 
@@ -23,15 +24,9 @@ export class TicketComponent implements OnInit {
   @Input() labels: Label[];
   @Input() ticket: Ticket;
 
-  @ContentChild('actionsTicket', {static: false})
-  actionsTicket: TemplateRef<any>;
-
-  @ViewChild('footerModal', {static: false})
-  footerModal: TemplateRef<any>;
-
   openModal() {
     const component = this.cfr.resolveComponentFactory(EditTicketComponent).create(this.injector);
-    component.instance.title = this.ticket.title;
+    component.instance.ticket = this.ticket;
     const options = new ModalOptions({
       title: {
         text: 'Edit ticket',
@@ -40,7 +35,7 @@ export class TicketComponent implements OnInit {
       maxHeight: '1024px',
       maxWidth: '400px'
     });
-    this.modalService.open(component, this.footerModal, options);
+    this.modalService.open(component, null, options);
   }
 
   ngOnInit() {
