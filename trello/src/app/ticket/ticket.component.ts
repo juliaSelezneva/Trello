@@ -27,6 +27,10 @@ export class TicketComponent implements OnInit {
   openModal() {
     const component = this.cfr.resolveComponentFactory(EditTicketComponent).create(this.injector);
     component.instance.ticket = this.ticket;
+    component.instance.saved.subscribe(ticket => {
+      this.modalService.close();
+
+    });
     const options = new ModalOptions({
       title: {
         text: 'Edit ticket',

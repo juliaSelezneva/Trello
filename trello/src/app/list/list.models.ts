@@ -20,6 +20,7 @@ export class Ticket {
   dueDate?: Date;
   estimate?: string;
   labels?: Label[];
+  // list: number;
 
   constructor(title, id = null, dueDate = null, estimate = null, labels: Label[] = null) {
     this.id = id;

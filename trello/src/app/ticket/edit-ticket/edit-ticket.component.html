@@ -1,4 +1,4 @@
-<jnt-form [layout]="ui.form.layout.horizontal" [formGroup]="editForm" (submitted)="editTicket(); close()">
+<jnt-form [layout]="ui.form.layout.horizontal" [formGroup]="editForm" (submitted)="editTicket()">
 
   <jnt-form-item>
     <jnt-col [span]="3">
@@ -7,6 +7,9 @@
     <jnt-col [span]="9">
       <jnt-form-control>
         <jnt-input formControlName="title" placeholder="Title"></jnt-input>
+        <jnt-form-message [type]="ui.form.validators.typeError.required">
+          This field is required
+        </jnt-form-message>
       </jnt-form-control>
     </jnt-col>
   </jnt-form-item>

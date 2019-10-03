@@ -11,8 +11,13 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const lists = [
       new List('Issue', [{id: 1, title: 'Create canban component', dueDate: new Date(2019, 9, 3), estimate: '2h'},
-          {id: 2, title: 'Refactor components', dueDate: new Date(2019, 9, 10), estimate: '2h', labels: [Label.delay, Label.doing]}], 11),
-      new List('Doing', [{id: 3, title: 'Implement list'}, {id: 4, title: 'Add ticket in list', labels: [Label.doing]}, {id: 5, title: 'Sort tickets'}], 12),
+        {id: 2, title: 'Refactor components', dueDate: new Date(2019, 9, 10), estimate: '2h', labels: [Label.delay, Label.doing]}], 11),
+      new List('Doing', [{id: 3, title: 'Implement list', dueDate: new Date(2019, 10, 4)}, {
+        id: 4,
+        title: 'Add ticket in list',
+        dueDate: new Date(2019, 9, 5),
+        labels: [Label.doing]
+      }, {id: 5, title: 'Sort tickets', dueDate: new Date(2019, 10, 20)}], 12),
       new List('Done', [{id: 6, title: 'Refactor list', dueDate: new Date(2019, 9, 25), estimate: '5h 30m'}], 13),
     ];
     const tickets = [
