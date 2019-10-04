@@ -1,5 +1,5 @@
-@import "../../assets/styles/variables";
-@import "~junte-ui/lib/assets/styles/variables";
+@import "../../../../assets/styles/variables";
+@import "../../../../../node_modules/junte-ui/lib/assets/styles/variables";
 
 :host {
   display: block;
@@ -7,10 +7,6 @@
 
 [add] {
   max-width: 250px;
-}
-
-[footerModal] {
-  padding: $gutter-small;
 }
 
 [form] {
@@ -24,4 +20,3 @@
   transition: background-color .3s;
   outline: 0;
 }
-

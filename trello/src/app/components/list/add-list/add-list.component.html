@@ -1,0 +1,25 @@
+<jnt-button *ngIf="mode == mode.view; else editList"
+            text="Add list"
+            [icon]="ui.icons.font.plus"
+            [width]="ui.width.fluid"
+            (click)="mode = editMode.edit" add>
+</jnt-button>
+
+<ng-template #editList>
+  <jnt-form [formGroup]="listForm" (submitted)="addList()" form>
+    <jnt-stack>
+      <jnt-input formControlName="title" placeholder="List title"></jnt-input>
+      <jnt-stack [type]="ui.stack.type.horizontal">
+        <jnt-button [icon]="ui.icons.font.plus"
+                    [type]="ui.form.button.type.submit"
+                    text="Add list">
+        </jnt-button>
+        <jnt-button [outline]="ui.outline.transparent"
+                    [icon]="ui.icons.font.close"
+                    [scheme]="ui.schemes.secondary"
+                    (click)="mode = editMode.view; this.listForm.reset()">
+        </jnt-button>
+      </jnt-stack>
+    </jnt-stack>
+  </jnt-form>
+</ng-template>

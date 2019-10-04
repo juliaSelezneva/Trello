@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CanbanComponent } from './canban/canban.component';
-import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { KanbanComponent } from './components/kanban/kanban.component';
+import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/canban', pathMatch: 'full'},
-  { path: 'canban', component: CanbanComponent },
+  { path: '', redirectTo: '/kanban', pathMatch: 'full'},
+  { path: 'kanban', component: KanbanComponent },
   { path: 'tickets/:id', component: TicketDetailComponent },
-  { path: '**', redirectTo: '/canban' }
+  { path: '**', redirectTo: '/kanban' }
 ];
 
 @NgModule({

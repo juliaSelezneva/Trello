@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Ticket } from '../../list/list.models';
-import { ListService } from '../../list.service';
-import { ModalService, UI } from 'junte-ui';
+import { Component, EventEmitter, Input } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ListService } from '../../../services/list.service';
+import { TicketService } from '../../../services/ticket.service';
+import { Ticket } from '../../../models/ticket';
+import { UI } from 'junte-ui';
 
 @Component({
   selector: 'app-edit-ticket',
@@ -33,14 +34,15 @@ export class EditTicketComponent {
   saved = new EventEmitter<Ticket>();
 
   constructor(private fb: FormBuilder,
-              private listService: ListService) {
+              private listService: ListService,
+              private ticketService: TicketService) {
   }
 
   editTicket(): void {
-    this.listService.updateTicket(this.ticket.id, this.editForm.getRawValue())
+    this.ticketService.updateTicket(this.editForm.getRawValue())
       .subscribe(ticket => {
          this.ticket = ticket;
-         this.saved.emit(ticket);
+        this.saved.emit(ticket);
         }
       );
   }

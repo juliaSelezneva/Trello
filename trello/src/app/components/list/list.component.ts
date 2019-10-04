@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalService, UI } from 'junte-ui';
-import { List, Ticket } from './list.models';
-import { Mode } from '../enum';
+import { UI } from 'junte-ui';
+import { List } from '../../models/list';
+import { EditMode } from '../../models/enum';
 import { FormBuilder } from '@angular/forms';
-import { ListService } from '../list.service';
+import { ListService } from '../../services/list.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TicketService } from '../../services/ticket.service';
+import { Ticket } from '../../models/ticket';
 
 @Component({
   selector: 'app-list',
@@ -14,18 +16,36 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 
 export class ListComponent implements OnInit {
 
+  private _list: List;
+
   constructor(private fb: FormBuilder,
-              private listService: ListService) {
+              private listService: ListService,
+              private ticketService: TicketService) {
   }
 
   ui = UI;
 
-  @Input() list: List;
-  mode = Mode;
+  @Input()
+  set list(list: List) {
+    this._list = list;
+    this.getTickets(this._list.id);
+  }
+
+  get list() {
+    return this._list;
+  }
+
+  tickets: Ticket[] = [];
+  mode = EditMode;
 
   ticketForm = this.fb.group({
     title: [null],
   });
+
+  private getTickets(list): void {
+    this.ticketService.getTickets(list)
+      .subscribe(tickets => this.tickets = tickets);
+  }
 
   addTicket(): void {
     const title = this.ticketForm.controls['title'].value;
@@ -33,9 +53,9 @@ export class ListComponent implements OnInit {
       return;
     }
     title.trim();
-    this.listService.addTicket(new Ticket(title))
+    this.ticketService.addTicket(new Ticket(title))
       .subscribe(ticket => {
-        this.list.tickets.push(ticket);
+        this.tickets.push(ticket);
         this.list.mode = this.mode.view;
       });
     this.ticketForm.reset();
@@ -44,7 +64,7 @@ export class ListComponent implements OnInit {
   droppedTicket(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
-        this.list.tickets,
+        this.tickets,
         event.previousIndex,
         event.currentIndex
       );

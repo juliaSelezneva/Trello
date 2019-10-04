@@ -1,20 +1,20 @@
 <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between">
   <input [(ngModel)]="list.title" input>
   <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.stack.gutter.tiny"
-             *ngIf="!!list.tickets && list.tickets.length > 1">
+             *ngIf="tickets.length > 1">
     <jnt-button [icon]="ui.icons.font.arrowLeft"
                 [outline]="ui.outline.ghost"
                 [size]="ui.sizes.tiny"
                 [scheme]="ui.schemes.secondary"
                 up
-                (click)="list.tickets.sort(compareUp)">
+                (click)="tickets.sort(compareUp)">
     </jnt-button>
     <jnt-button [icon]="ui.icons.font.arrowLeft"
                 [outline]="ui.outline.ghost"
                 [size]="ui.sizes.tiny"
                 [scheme]="ui.schemes.secondary"
                 down
-                (click)="list.tickets.sort(compareDown)">
+                (click)="tickets.sort(compareDown)">
     </jnt-button>
   </jnt-stack>
 </jnt-stack>
@@ -22,9 +22,9 @@
 <jnt-stack [align]="ui.flex.align.stretch" *ngIf="!!list"
            tickets
            cdkDropList
-           [cdkDropListData]="list.tickets"
+           [cdkDropListData]="tickets"
            (cdkDropListDropped)="droppedTicket($event)">
-  <app-ticket *ngFor="let ticket of list.tickets" [ticket]="ticket" cdkDrag></app-ticket>
+  <app-ticket *ngFor="let ticket of tickets" [ticket]="ticket" cdkDrag></app-ticket>
 </jnt-stack>
 
 <jnt-button *ngIf="list.mode == mode.view; else editTicket"

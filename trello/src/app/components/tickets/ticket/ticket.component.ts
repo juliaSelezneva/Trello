@@ -1,8 +1,8 @@
-import { Component, ComponentFactoryResolver, ContentChild, Injector, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, Injector, Input, OnInit } from '@angular/core';
 import { ModalOptions, ModalService, UI } from 'junte-ui';
-import { Ticket } from '../list/list.models';
-import { Label } from '../enum';
-import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
+import { Label } from '../../../models/enum';
+import { EditTicketComponent } from '../edit-ticket/edit-ticket.component';
+import { Ticket } from '../../../models/ticket';
 
 @Component({
   selector: 'app-ticket',
@@ -29,7 +29,7 @@ export class TicketComponent implements OnInit {
     component.instance.ticket = this.ticket;
     component.instance.saved.subscribe(ticket => {
       this.modalService.close();
-
+      this.ticket = ticket;
     });
     const options = new ModalOptions({
       title: {
