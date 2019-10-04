@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { EditMode } from '../../../models/enum';
 import { UI } from 'junte-ui';
 import { List } from '../../../models/list';
@@ -27,11 +27,12 @@ export class AddListComponent {
               private listService: ListService) {
   }
 
-  addList(): void {
+  add(): void {
     this.listService.addList(this.listForm.getRawValue())
       .subscribe(list => {
         this.added.emit(list);
         this.listForm.reset();
+        this.mode = EditMode.view;
       });
   }
 

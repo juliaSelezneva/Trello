@@ -30,13 +30,12 @@ export class KanbanComponent implements OnInit {
       .subscribe(lists => this.lists = lists);
   }
 
-  addList() {
+  add() {
     this.load();
   }
 
-  trackList(list: List) {
+  track(index, list: List) {
     return list.id;
-
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ListService } from '../../../services/list.service';
 import { TicketService } from '../../../services/ticket.service';
@@ -16,9 +16,9 @@ export class EditTicketComponent {
 
   private _ticket: Ticket;
 
-  @Input() set ticket (ticket: Ticket) {
+  @Input() set ticket(ticket: Ticket) {
     this._ticket = ticket;
-    this.editForm.patchValue(ticket as {[key: string]: any});
+    this.editForm.patchValue(ticket as { [key: string]: any });
   }
 
   get ticket() {
@@ -26,25 +26,34 @@ export class EditTicketComponent {
   }
 
   editForm = this.fb.group({
-    title: [[] , Validators.required],
+    title: [[], Validators.required],
     estimate: [],
     dueDate: [],
   });
 
+
+  @Output()
   saved = new EventEmitter<Ticket>();
+
+  @Output()
+  closed = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,
               private listService: ListService,
               private ticketService: TicketService) {
   }
 
-  editTicket(): void {
+  edit(): void {
     this.ticketService.updateTicket(this.editForm.getRawValue())
       .subscribe(ticket => {
-         this.ticket = ticket;
-        this.saved.emit(ticket);
+          this.ticket = ticket;
+          this.saved.emit(ticket);
         }
       );
+  }
+
+  close() {
+    this.closed.emit();
   }
 
 }

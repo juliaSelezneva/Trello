@@ -31,6 +31,9 @@ export class TicketComponent implements OnInit {
       this.modalService.close();
       this.ticket = ticket;
     });
+    component.instance.closed.subscribe(() => {
+      this.modalService.close();
+    });
     const options = new ModalOptions({
       title: {
         text: 'Edit ticket',

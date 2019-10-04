@@ -20,6 +20,7 @@
   border-radius: $corner-small;
   width: 100%;
   cursor: pointer;
+  min-height: 28px;
   &:focus {
     border-color: $red;
     outline: 0;
@@ -40,7 +41,7 @@
 
 [tickets] {
   min-height: $gutter-normal;
-  margin: $gutter-normal 0;
+  margin-top: $gutter-normal;
   &:empty {
     margin: 0;
   }

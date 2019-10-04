@@ -1,27 +1,29 @@
-<jnt-button *ngIf="mode == editMode.view; else addList"
-            text="Add list"
-            [icon]="ui.icons.font.plus"
+<jnt-button *ngIf="mode == editMode.view; else addTicket"
+            text="Add ticket"
             [width]="ui.width.fluid"
+            [icon]="ui.icons.font.plus"
+            [size]="ui.sizes.small"
+            [scheme]="ui.schemes.secondary"
             (click)="mode = editMode.edit">
 </jnt-button>
 
-<ng-template #addList>
-  <jnt-form [formGroup]="listForm" (submitted)="add()" jntValidation form>
+<ng-template #addTicket>
+  <jnt-form [formGroup]="ticketForm" (submitted)="add()" jntValidation>
     <jnt-form-item>
       <jnt-form-control name="title">
-        <jnt-input formControlName="title" placeholder="List title"></jnt-input>
+        <jnt-input formControlName="title" placeholder="Ticket content"></jnt-input>
         <jnt-form-message [type]="ui.form.validators.typeError.required">This field is required</jnt-form-message>
       </jnt-form-control>
     </jnt-form-item>
     <jnt-stack [type]="ui.stack.type.horizontal">
       <jnt-button [icon]="ui.icons.font.plus"
                   [type]="ui.form.button.type.submit"
-                  text="Add list">
+                  text="Add ticket">
       </jnt-button>
       <jnt-button [outline]="ui.outline.transparent"
                   [icon]="ui.icons.font.close"
                   [scheme]="ui.schemes.secondary"
-                  (click)="mode = editMode.view; this.listForm.reset()">
+                  (click)="mode = editMode.view; this.ticketForm.reset()">
       </jnt-button>
     </jnt-stack>
   </jnt-form>

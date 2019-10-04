@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket';
 
 @Injectable({providedIn: 'root'})
+
 export class TicketService {
 
   httpOptions = {
@@ -28,7 +29,7 @@ export class TicketService {
     return this.http.post<Ticket>(this.ticketsUrl, ticket, this.httpOptions);
   }
 
-  updateTicket(ticket: Ticket): Observable<Ticket> {
+  updateTicket(ticket: {[key: string]: any}): Observable<Ticket> {
     return this.http.put<Ticket>(this.ticketsUrl, ticket, this.httpOptions);
   }
 

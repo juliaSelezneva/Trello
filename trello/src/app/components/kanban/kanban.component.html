@@ -1,5 +1,4 @@
 <jnt-stack cdkDropListGroup [type]="ui.stack.type.horizontal">
-  <app-list *ngFor="let list of lists;trackBy: trackList" [list]="list"></app-list>
-  <app-add-list (added)="addList($event)"></app-add-list>
-
+  <app-list *ngFor="let list of lists;trackBy: track" [list]="list"></app-list>
+  <app-add-list (added)="add($event)"></app-add-list>
 </jnt-stack>

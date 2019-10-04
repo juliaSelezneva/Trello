@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { UI } from 'junte-ui';
 import { List } from '../../models/list';
-import { EditMode } from '../../models/enum';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ListService } from '../../services/list.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TicketService } from '../../services/ticket.service';
@@ -17,18 +16,27 @@ import { Ticket } from '../../models/ticket';
 export class ListComponent implements OnInit {
 
   private _list: List;
+  title: string;
+  ui = UI;
+  titleControl = new FormControl();
+
+  listForm = this.fb.group({
+    title: this.titleControl
+  });
+
+  @ViewChild('control', {static: true}) control: ElementRef;
 
   constructor(private fb: FormBuilder,
+              public element: ElementRef,
               private listService: ListService,
               private ticketService: TicketService) {
   }
 
-  ui = UI;
 
   @Input()
   set list(list: List) {
     this._list = list;
-    this.getTickets(this._list.id);
+    this.load();
   }
 
   get list() {
@@ -36,29 +44,10 @@ export class ListComponent implements OnInit {
   }
 
   tickets: Ticket[] = [];
-  mode = EditMode;
 
-  ticketForm = this.fb.group({
-    title: [null],
-  });
-
-  private getTickets(list): void {
-    this.ticketService.getTickets(list)
+  private load(): void {
+    this.ticketService.getTickets(this.list.id)
       .subscribe(tickets => this.tickets = tickets);
-  }
-
-  addTicket(): void {
-    const title = this.ticketForm.controls['title'].value;
-    if (!title) {
-      return;
-    }
-    title.trim();
-    this.ticketService.addTicket(new Ticket(title))
-      .subscribe(ticket => {
-        this.tickets.push(ticket);
-        this.list.mode = this.mode.view;
-      });
-    this.ticketForm.reset();
   }
 
   droppedTicket(event: CdkDragDrop<string[]>) {
@@ -76,6 +65,16 @@ export class ListComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  add(ticket: Ticket) {
+    this.ticketService.addTicket(ticket)
+      .subscribe(() => this.load());
+  }
+
+
+  track(index, ticket: Ticket) {
+    return ticket.id;
   }
 
   compareUp(a, b) {
@@ -100,6 +99,8 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title = this.list.title;
+    this.titleControl.setValue(this.list.title);
+    this.titleControl.valueChanges.subscribe(title => this.list.title = title);
   }
-
 }
