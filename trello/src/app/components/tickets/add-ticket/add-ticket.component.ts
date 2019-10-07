@@ -4,6 +4,8 @@ import { List } from '../../../models/list';
 import { EditMode } from '../../../models/enum';
 import { UI } from 'junte-ui';
 import { Ticket } from '../../../models/ticket';
+import { ListService } from '../../../services/list.service';
+import { TicketService } from '../../../services/ticket.service';
 
 @Component({
   selector: 'app-add-ticket',
@@ -17,21 +19,28 @@ export class AddTicketComponent {
   ui = UI;
 
   ticketForm = this.fb.group({
+    id: [],
     title: [null, [Validators.required]]
   });
 
   @Input() list: List;
+  @Input() ticket: Ticket;
 
   @Output()
   added = new EventEmitter<Ticket>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private ticketService: TicketService) {
   }
 
   add(): void {
-    const ticket = Object.assign({list: this.list.id}, this.ticketForm.getRawValue());
-    this.added.emit(ticket);
-    this.ticketForm.reset();
-    this.mode = EditMode.view;
+    this.ticketService.addTicket(this.list.id, this.ticketForm.getRawValue())
+      .subscribe(ticket => {
+        this.ticket = ticket;
+        console.log(ticket);
+        this.added.emit(ticket);
+        this.ticketForm.reset();
+        this.mode = EditMode.view;
+      });
   }
 }

@@ -67,12 +67,6 @@ export class ListComponent implements OnInit {
     }
   }
 
-  add(ticket: Ticket) {
-    this.ticketService.addTicket(ticket)
-      .subscribe(() => this.load());
-  }
-
-
   track(index, ticket: Ticket) {
     return ticket.id;
   }

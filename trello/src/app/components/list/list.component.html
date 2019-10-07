@@ -26,7 +26,7 @@
            [cdkDropListData]="tickets"
            (cdkDropListDropped)="droppedTicket($event)">
   <app-ticket *ngFor="let ticket of tickets; trackBy: track" [ticket]="ticket" cdkDrag></app-ticket>
-  <app-add-ticket (added)="add($event)" [list]="list"></app-add-ticket>
+  <app-add-ticket (added)="load()" [list]="list" [ticket]="ticket"></app-add-ticket>
 </jnt-stack>
 
 

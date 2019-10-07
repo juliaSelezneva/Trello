@@ -28,12 +28,13 @@ export class TicketService {
     );
   }
 
-  addTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(this.ticketsUrl, ticket, this.httpOptions);
+  addTicket(list: number, ticket: {[key: string]: any}): Observable<Ticket> {
+    return this.http.post<Ticket>(this.ticketsUrl, ticket, this.httpOptions)
+      .pipe(map(() => Object.assign(new Ticket(), list, ticket)));
   }
 
   updateTicket(id: number, ticket: {[key: string]: any}): Observable<Ticket> {
-    return this.http.put<Ticket>(`${this.ticketsUrl}`, ticket, this.httpOptions)
+    return this.http.put<Ticket>(this.ticketsUrl, ticket, this.httpOptions)
       .pipe(map(() => Object.assign(new Ticket(), ticket)));
   }
 
