@@ -26,6 +26,7 @@ export class EditTicketComponent {
   }
 
   editForm = this.fb.group({
+    id: [],
     title: [[], Validators.required],
     estimate: [],
     dueDate: [],
@@ -44,7 +45,7 @@ export class EditTicketComponent {
   }
 
   edit(): void {
-    this.ticketService.updateTicket(this.editForm.getRawValue())
+    this.ticketService.updateTicket(this.ticket.id, this.editForm.getRawValue())
       .subscribe(ticket => {
           this.ticket = ticket;
           this.saved.emit(ticket);

@@ -14,6 +14,9 @@ export class TicketService {
 
   private ticketsUrl = 'api/tickets';
 
+  constructor(private http: HttpClient) {
+  }
+
   getTicket(id: number): Observable<Ticket> {
     const url = `${this.ticketsUrl}/${id}`;
     return this.http.get<Ticket>(url);
@@ -29,10 +32,9 @@ export class TicketService {
     return this.http.post<Ticket>(this.ticketsUrl, ticket, this.httpOptions);
   }
 
-  updateTicket(ticket: {[key: string]: any}): Observable<Ticket> {
-    return this.http.put<Ticket>(this.ticketsUrl, ticket, this.httpOptions);
+  updateTicket(id: number, ticket: {[key: string]: any}): Observable<Ticket> {
+    return this.http.put<Ticket>(`${this.ticketsUrl}`, ticket, this.httpOptions)
+      .pipe(map(() => Object.assign(new Ticket(), ticket)));
   }
 
-  constructor(private http: HttpClient) {
-  }
 }
