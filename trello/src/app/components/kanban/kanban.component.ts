@@ -15,7 +15,7 @@ export class KanbanComponent implements OnInit {
 
   ui = UI;
 
-  lists: List[];
+  lists: List[] = [];
   ticket: Ticket;
   loading: boolean;
 

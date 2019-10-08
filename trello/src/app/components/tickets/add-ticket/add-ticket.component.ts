@@ -25,6 +25,7 @@ export class AddTicketComponent {
 
   @Input() list: List;
   @Input() ticket: Ticket;
+  @Input() tickets: Ticket[];
 
   @Output()
   added = new EventEmitter<Ticket>();
@@ -37,7 +38,6 @@ export class AddTicketComponent {
     this.ticketService.addTicket(this.list.id, this.ticketForm.getRawValue())
       .subscribe(ticket => {
         this.ticket = ticket;
-        console.log(ticket);
         this.added.emit(ticket);
         this.ticketForm.reset();
         this.mode = EditMode.view;

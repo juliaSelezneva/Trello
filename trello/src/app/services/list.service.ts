@@ -17,7 +17,7 @@ export class ListService {
     return this.http.get<List[]>(this.listsUrl);
   }
 
-  addList(list: {[key: string]: any}): Observable<List> {
+  addList(list: { [key: string]: any }): Observable<List> {
     return this.http.post<List>(this.listsUrl, list, this.httpOptions);
   }
 

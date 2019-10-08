@@ -50,7 +50,9 @@ export class ListComponent implements OnInit {
   private load(): void {
     this.loading = true;
     this.ticketService.getTickets(this.list.id).pipe(finalize(() => this.loading = false))
-      .subscribe(tickets => this.tickets = tickets);
+      .subscribe(tickets => {
+        this.tickets = tickets;
+      });
   }
 
   droppedTicket(event: CdkDragDrop<string[]>) {
@@ -68,6 +70,11 @@ export class ListComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  add() {
+    console.log(this.tickets);
+    this.load();
   }
 
   track(index, ticket: Ticket) {

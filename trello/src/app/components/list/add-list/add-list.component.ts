@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EditMode } from '../../../models/enum';
 import { UI } from 'junte-ui';
 import { List } from '../../../models/list';
@@ -16,6 +16,8 @@ export class AddListComponent {
   editMode = EditMode;
   mode = EditMode.view;
 
+  @Input() list: List;
+
   listForm = this.fb.group({
     title: [null, Validators.required],
   });
@@ -30,6 +32,7 @@ export class AddListComponent {
   add(): void {
     this.listService.addList(this.listForm.getRawValue())
       .subscribe(list => {
+        this.list = list;
         this.added.emit(list);
         this.listForm.reset();
         this.mode = EditMode.view;
