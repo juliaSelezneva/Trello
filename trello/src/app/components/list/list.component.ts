@@ -6,6 +6,7 @@ import { ListService } from '../../services/list.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TicketService } from '../../services/ticket.service';
 import { Ticket } from '../../models/ticket';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -44,9 +45,11 @@ export class ListComponent implements OnInit {
   }
 
   tickets: Ticket[] = [];
+  loading: boolean;
 
   private load(): void {
-    this.ticketService.getTickets(this.list.id)
+    this.loading = true;
+    this.ticketService.getTickets(this.list.id).pipe(finalize(() => this.loading = false))
       .subscribe(tickets => this.tickets = tickets);
   }
 

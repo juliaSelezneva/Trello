@@ -1,4 +1,5 @@
-<jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between" [align]="ui.flex.align.center">
+<jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between"
+           [align]="ui.flex.align.center">
   <jnt-form [formGroup]="listForm">
     <input #control formControlName="title" input
            (blur)="!list.title ? titleControl.patchValue(title) : title = list.title">
@@ -25,9 +26,13 @@
            cdkDropList
            [cdkDropListData]="tickets"
            (cdkDropListDropped)="droppedTicket($event)">
-  <app-ticket *ngFor="let ticket of tickets; trackBy: track" [ticket]="ticket" cdkDrag></app-ticket>
+  <ng-container *ngIf="!loading; else skeleton">
+    <app-ticket *ngFor="let ticket of tickets; trackBy: track" [ticket]="ticket" cdkDrag></app-ticket>
+  </ng-container>
   <app-add-ticket (added)="load()" [list]="list" [ticket]="ticket"></app-add-ticket>
 </jnt-stack>
 
-
+<ng-template #skeleton>
+  <jnt-skeleton [lines]="4"></jnt-skeleton>
+</ng-template>
 

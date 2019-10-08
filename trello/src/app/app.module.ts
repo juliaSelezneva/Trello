@@ -16,6 +16,7 @@ import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket
 import { EditTicketComponent } from './components/tickets/edit-ticket/edit-ticket.component';
 import { AddListComponent } from './components/list/add-list/add-list.component';
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
+import { ArrayPipesModule } from './pipes/array-pipes.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.c
     TicketDetailComponent,
     EditTicketComponent,
     AddListComponent,
-    AddTicketComponent
+    AddTicketComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,8 +38,9 @@ import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.c
     ReactiveFormsModule,
     HttpClientModule,
     DragDropModule,
+    ArrayPipesModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+      InMemoryDataService, { dataEncapsulation: false, delay: 3000 }
     )
   ],
   entryComponents: [

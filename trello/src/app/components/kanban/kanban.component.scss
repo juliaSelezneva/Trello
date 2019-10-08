@@ -5,4 +5,7 @@
   display: block;
 }
 
-
+[block] {
+  min-width: 250px;
+  background-color: $primary-color-light-70;
+}

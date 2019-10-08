@@ -4,6 +4,7 @@ import { ListService } from '../../../services/list.service';
 import { TicketService } from '../../../services/ticket.service';
 import { Ticket } from '../../../models/ticket';
 import { UI } from 'junte-ui';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-ticket',
@@ -15,6 +16,7 @@ export class EditTicketComponent {
   ui = UI;
 
   private _ticket: Ticket;
+  loading: boolean;
 
   @Input() set ticket(ticket: Ticket) {
     this._ticket = ticket;
@@ -45,7 +47,8 @@ export class EditTicketComponent {
   }
 
   edit(): void {
-    this.ticketService.updateTicket(this.ticket.id, this.editForm.getRawValue())
+    this.loading = true;
+    this.ticketService.updateTicket(this.ticket.id, this.editForm.getRawValue()).pipe(finalize(() => this.loading = false))
       .subscribe(ticket => {
           this.ticket = ticket;
           this.saved.emit(ticket);

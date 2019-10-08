@@ -1,4 +1,15 @@
 <jnt-stack cdkDropListGroup [type]="ui.stack.type.horizontal">
-  <app-list *ngFor="let list of lists;trackBy: track" [list]="list"></app-list>
+  <ng-container *ngIf="!loading; else loadingTemplate">
+    <app-list *ngFor="let list of lists;trackBy: track" [list]="list"></app-list>
+  </ng-container>
   <app-add-list (added)="add($event)"></app-add-list>
 </jnt-stack>
+
+
+<ng-template #loadingTemplate>
+  <div *ngFor="let i of 3 | mockArray">
+    <jnt-block [width]="ui.width.fluid" [padding]="ui.padding.normal" block>
+      <jnt-skeleton [lines]="4"></jnt-skeleton>
+    </jnt-block>
+  </div>
+</ng-template>

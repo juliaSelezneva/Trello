@@ -4,6 +4,7 @@ import { UI } from 'junte-ui';
 import { ListService } from '../../services/list.service';
 import { List } from '../../models/list';
 import { Ticket } from '../../models/ticket';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-kanban',
@@ -16,6 +17,7 @@ export class KanbanComponent implements OnInit {
 
   lists: List[];
   ticket: Ticket;
+  loading: boolean;
 
   constructor(private fb: FormBuilder,
               private listService: ListService) {
@@ -26,7 +28,8 @@ export class KanbanComponent implements OnInit {
   }
 
   load(): void {
-    this.listService.getLists()
+    this.loading = true;
+    this.listService.getLists().pipe(finalize(() => this.loading = false))
       .subscribe(lists => this.lists = lists);
   }
 
