@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ListService } from '../../../services/list.service';
 import { TicketService } from '../../../services/ticket.service';
@@ -17,6 +17,8 @@ export class EditTicketComponent {
 
   private _ticket: Ticket;
   loading: boolean;
+
+  @ContentChild('footer', {static: false}) footer: TemplateRef<any>;
 
   @Input() set ticket(ticket: Ticket) {
     this._ticket = ticket;

@@ -29,15 +29,15 @@
   <ng-container *ngIf="tickets.length; else skeleton">
     <app-ticket *ngFor="let ticket of tickets; trackBy: track" [ticket]="ticket" cdkDrag></app-ticket>
   </ng-container>
-  <app-add-ticket (added)="add()" [list]="list" [tickets]="tickets"></app-add-ticket>
+  <app-add-ticket (added)="load()" [list]="list" [tickets]="tickets" [(loading)]="loading.adding"></app-add-ticket>
 </jnt-stack>
 
 <ng-template #skeleton>
-  <ng-container *ngIf="loading">
+  <ng-container *ngIf="!tickets.length && loading.tickets">
     <jnt-skeleton [lines]="4"></jnt-skeleton>
   </ng-container>
 </ng-template>
 
-<div spin *ngIf="tickets.length && loading">
+<div spin *ngIf="tickets.length && loading.adding">
   <jnt-spinner></jnt-spinner>
 </div>

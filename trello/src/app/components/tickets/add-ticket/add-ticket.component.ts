@@ -4,8 +4,8 @@ import { List } from '../../../models/list';
 import { EditMode } from '../../../models/enum';
 import { UI } from 'junte-ui';
 import { Ticket } from '../../../models/ticket';
-import { ListService } from '../../../services/list.service';
 import { TicketService } from '../../../services/ticket.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-ticket',
@@ -30,12 +30,17 @@ export class AddTicketComponent {
   @Output()
   added = new EventEmitter<Ticket>();
 
+  @Input() loading = false;
+  @Output() loadingChange = new EventEmitter<boolean>();
+
   constructor(private fb: FormBuilder,
               private ticketService: TicketService) {
   }
 
   add(): void {
+    this.loadingChange.emit(true);
     this.ticketService.addTicket(this.list.id, this.ticketForm.getRawValue())
+      .pipe(finalize(() => this.loadingChange.emit(false)))
       .subscribe(ticket => {
         this.ticket = ticket;
         this.added.emit(ticket);

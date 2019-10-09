@@ -23,7 +23,7 @@
   cursor: pointer;
   min-height: 28px;
   &:focus {
-    border-color: $red;
+    border-color: $red-color;
     outline: 0;
   }
 }

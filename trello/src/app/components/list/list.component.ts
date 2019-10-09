@@ -45,11 +45,15 @@ export class ListComponent implements OnInit {
   }
 
   tickets: Ticket[] = [];
-  loading: boolean;
+  loading = {
+    tickets: false,
+    adding: false
+  };
 
   private load(): void {
-    this.loading = true;
-    this.ticketService.getTickets(this.list.id).pipe(finalize(() => this.loading = false))
+    this.loading.tickets = true;
+    this.ticketService.getTickets(this.list.id)
+      .pipe(finalize(() => this.loading.tickets = false))
       .subscribe(tickets => {
         this.tickets = tickets;
       });
@@ -72,11 +76,6 @@ export class ListComponent implements OnInit {
     }
   }
 
-  add() {
-    console.log(this.tickets);
-    this.load();
-  }
-
   track(index, ticket: Ticket) {
     return ticket.id;
   }
@@ -90,7 +89,6 @@ export class ListComponent implements OnInit {
     }
     return 0;
   }
-
 
   compareDown(a, b) {
     if (a.title > b.title) {

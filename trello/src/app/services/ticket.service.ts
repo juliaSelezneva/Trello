@@ -29,8 +29,7 @@ export class TicketService {
   }
 
   addTicket(list: number, ticket: {[key: string]: any}): Observable<Ticket> {
-    return this.http.post<Ticket>(this.ticketsUrl, ticket, this.httpOptions)
-      .pipe(map(() => Object.assign(new Ticket(), {ticket: ticket}, {list: list})));
+    return this.http.post<Ticket>(this.ticketsUrl, Object.assign(ticket, {list: list}), this.httpOptions);
   }
 
   updateTicket(id: number, ticket: {[key: string]: any}): Observable<Ticket> {
