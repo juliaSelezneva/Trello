@@ -30,17 +30,19 @@ export class AddTicketComponent {
   @Output()
   added = new EventEmitter<Ticket>();
 
-  @Input() loading = false;
-  @Output() loadingChange = new EventEmitter<boolean>();
+  @Input() loading: boolean;
+  // @Output() loadingChange = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder,
               private ticketService: TicketService) {
   }
 
   add(): void {
-    this.loadingChange.emit(true);
+    // this.loadingChange.emit(true);
+    this.loading = true;
     this.ticketService.addTicket(this.list.id, this.ticketForm.getRawValue())
-      .pipe(finalize(() => this.loadingChange.emit(false)))
+      // .pipe(finalize(() => this.loadingChange.emit(false)))
+      .pipe(finalize(() => this.loading = false))
       .subscribe(ticket => {
         this.ticket = ticket;
         this.added.emit(ticket);

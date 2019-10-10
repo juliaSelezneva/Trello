@@ -14,6 +14,7 @@ export class InMemoryDataService implements InMemoryDbService {
       new List('Issue', 11),
       new List('Doing', 12),
       new List('Done',  13),
+      new List('Delay',  14),
     ];
     const tickets = [
       new Ticket('Create kanban component', 1, new Date(2019, 9, 3), '2h', [Label.delay, Label.doing], 11),

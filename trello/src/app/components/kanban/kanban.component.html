@@ -5,6 +5,10 @@
   <app-add-list (added)="load()" [list]="list"></app-add-list>
 </jnt-stack>
 
+<ng-template #nodata>
+  No tickets
+</ng-template>
+
 <ng-template #loadingTemplate>
   <div *ngFor="let i of 3 | mockArray">
     <jnt-block [width]="ui.width.fluid" [padding]="ui.padding.normal" block>

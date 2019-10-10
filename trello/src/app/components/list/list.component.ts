@@ -45,15 +45,18 @@ export class ListComponent implements OnInit {
   }
 
   tickets: Ticket[] = [];
-  loading = {
-    tickets: false,
-    adding: false
-  };
+  // loading = {
+  //   tickets: false,
+  //   adding: false
+  // };
+  loading: boolean;
 
   private load(): void {
-    this.loading.tickets = true;
+    // this.loading.tickets = true;
+    this.loading = true;
     this.ticketService.getTickets(this.list.id)
-      .pipe(finalize(() => this.loading.tickets = false))
+      // .pipe(finalize(() => this.loading.tickets = false))
+      .pipe(finalize(() => this.loading = false))
       .subscribe(tickets => {
         this.tickets = tickets;
       });

@@ -4,6 +4,7 @@ import { UI } from 'junte-ui';
 import { List } from '../../../models/list';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ListService } from '../../../services/list.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-list',
@@ -15,6 +16,7 @@ export class AddListComponent {
   ui = UI;
   editMode = EditMode;
   mode = EditMode.view;
+  loading: boolean;
 
   @Input() list: List;
 
@@ -30,7 +32,9 @@ export class AddListComponent {
   }
 
   add(): void {
+    this.loading = true;
     this.listService.addList(this.listForm.getRawValue())
+      .pipe(finalize(() => this.loading = false))
       .subscribe(list => {
         this.list = list;
         this.added.emit(list);
