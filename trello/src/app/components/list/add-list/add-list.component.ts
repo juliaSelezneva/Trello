@@ -33,10 +33,13 @@ export class AddListComponent {
 
   add(): void {
     this.loading = true;
+
     this.listService.addList(this.listForm.getRawValue())
       .pipe(finalize(() => this.loading = false))
       .subscribe(list => {
         this.list = list;
+        const serialList = JSON.stringify(this.list);
+        localStorage.setItem(this.list.title, serialList);
         this.added.emit(list);
         this.listForm.reset();
         this.mode = EditMode.view;

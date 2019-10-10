@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../../services/list.service';
@@ -28,13 +28,14 @@ export class KanbanComponent implements OnInit {
   }
 
   load(): void {
-    this.loading = true;
-    this.listService.getLists().pipe(finalize(() => this.loading = false))
-      .subscribe(lists => this.lists = lists);
+    this.lists = JSON.parse(localStorage.getItem('lists'));
+    // this.loading = true;
+    // this.listService.getLists().pipe(finalize(() => this.loading = false))
+    //   .subscribe(lists => this.lists = lists);
   }
 
   track(index, list: List) {
     return list.id;
   }
-
 }
+

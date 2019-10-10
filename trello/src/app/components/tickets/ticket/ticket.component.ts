@@ -46,6 +46,8 @@ export class TicketComponent implements OnInit {
   }
 
   ngOnInit() {
+    const serialTicket = JSON.stringify(this.ticket);
+    localStorage.setItem(this.ticket.title, serialTicket);
   }
 
 }
