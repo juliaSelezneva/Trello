@@ -1,12 +1,12 @@
 <jnt-stack cdkDropListGroup [type]="ui.stack.type.horizontal">
-  <ng-container *ngIf="!!lists.length; else loadingTemplate">
+  <ng-container *ngIf="!!lists.length; else nodata">
     <app-list *ngFor="let list of lists; trackBy: track" [list]="list"></app-list>
   </ng-container>
   <app-add-list (added)="load()" [list]="list"></app-add-list>
 </jnt-stack>
 
 <ng-template #nodata>
-  No tickets
+  <span *ngIf="!loading; else loadingTemplate">No lists</span>
 </ng-template>
 
 <ng-template #loadingTemplate>

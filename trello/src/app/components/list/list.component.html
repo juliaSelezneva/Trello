@@ -26,13 +26,18 @@
            cdkDropList
            [cdkDropListData]="tickets"
            (cdkDropListDropped)="droppedTicket($event)">
-  <ng-container *ngIf="tickets.length; else skeleton">
+  <ng-container *ngIf="tickets.length; else nodata">
     <app-ticket *ngFor="let ticket of tickets; trackBy: track" [ticket]="ticket" cdkDrag></app-ticket>
   </ng-container>
-  <app-add-ticket (added)="load()" [list]="list" [tickets]="tickets" [loading]="loading"></app-add-ticket>
 </jnt-stack>
 
-<ng-template #skeleton>
+<app-add-ticket (added)="load()" [list]="list" [tickets]="tickets" [loading]="loading"></app-add-ticket>
+
+<ng-template #nodata>
+  <span *ngIf="!loading; else loadingTemplate" nodata>No tickets</span>
+</ng-template>
+
+<ng-template #loadingTemplate>
   <ng-container *ngIf="!tickets.length && loading">
     <jnt-skeleton [lines]="4"></jnt-skeleton>
   </ng-container>

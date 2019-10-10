@@ -43,6 +43,7 @@
 [tickets] {
   min-height: $gutter-normal;
   margin-top: $gutter-normal;
+  margin-bottom: $gutter-normal;
   &:empty {
     margin: 0;
   }
@@ -58,6 +59,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+[nodata] {
+  color: $gray-color-800;
+  position: absolute;
 }
 
 .cdk-drop-list-dragging .cdk-drag {
