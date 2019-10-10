@@ -3,8 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ListService } from '../../../services/list.service';
 import { TicketService } from '../../../services/ticket.service';
 import { Ticket } from '../../../models/ticket';
-import { UI } from 'junte-ui';
+import { SelectMode, UI } from 'junte-ui';
 import { finalize } from 'rxjs/operators';
+import { Label } from '../../../models/enum';
 
 @Component({
   selector: 'app-edit-ticket',
@@ -17,6 +18,16 @@ export class EditTicketComponent {
 
   private _ticket: Ticket;
   loading: boolean;
+
+  selectMode = SelectMode;
+  labels = Label;
+
+  options: any[] = [
+    { value: this.labels.delay, label: this.labels.delay },
+    { value: this.labels.doing, label: this.labels.doing },
+    { value: this.labels.done, label: this.labels.done },
+    { value: this.labels.toDo, label: this.labels.toDo },
+  ];
 
   @ContentChild('footer', {static: false}) footer: TemplateRef<any>;
 
@@ -34,8 +45,8 @@ export class EditTicketComponent {
     title: [[], Validators.required],
     estimate: [],
     dueDate: [],
+    labels: []
   });
-
 
   @Output()
   saved = new EventEmitter<Ticket>();
@@ -50,7 +61,8 @@ export class EditTicketComponent {
 
   edit(): void {
     this.loading = true;
-    this.ticketService.updateTicket(this.ticket.id, this.editForm.getRawValue()).pipe(finalize(() => this.loading = false))
+    this.ticketService.updateTicket(this.ticket.id, this.editForm.getRawValue())
+      .pipe(finalize(() => this.loading = false))
       .subscribe(ticket => {
           this.ticket = ticket;
           this.saved.emit(ticket);

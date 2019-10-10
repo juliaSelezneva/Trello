@@ -40,7 +40,7 @@ export class TicketComponent implements OnInit {
         icon: UI.icons.font.edit
       },
       maxHeight: '1024px',
-      maxWidth: '400px'
+      maxWidth: '800px'
     });
     this.modalService.open(component, null, options);
   }

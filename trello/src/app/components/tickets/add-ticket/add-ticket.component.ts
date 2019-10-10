@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { List } from '../../../models/list';
-import { EditMode } from '../../../models/enum';
+import { EditMode, Label } from '../../../models/enum';
 import { UI } from 'junte-ui';
 import { Ticket } from '../../../models/ticket';
 import { TicketService } from '../../../services/ticket.service';
@@ -16,6 +16,7 @@ export class AddTicketComponent {
 
   editMode = EditMode;
   mode = EditMode.view;
+
   ui = UI;
 
   ticketForm = this.fb.group({
@@ -31,6 +32,7 @@ export class AddTicketComponent {
   added = new EventEmitter<Ticket>();
 
   @Input() loading: boolean;
+
   // @Output() loadingChange = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder,
@@ -41,7 +43,7 @@ export class AddTicketComponent {
     // this.loadingChange.emit(true);
     this.loading = true;
     this.ticketService.addTicket(this.list.id, this.ticketForm.getRawValue())
-      // .pipe(finalize(() => this.loadingChange.emit(false)))
+    // .pipe(finalize(() => this.loadingChange.emit(false)))
       .pipe(finalize(() => this.loading = false))
       .subscribe(ticket => {
         this.ticket = ticket;

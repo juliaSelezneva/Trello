@@ -32,7 +32,27 @@
     </jnt-col>
     <jnt-col [span]="9">
       <jnt-form-control name="dueDate">
-        <jnt-input formControlName="dueDate" placeholder="dueDate"></jnt-input>
+        <jnt-date-picker placeholder="Due date" formControlName="dueDate"></jnt-date-picker>
+      </jnt-form-control>
+    </jnt-col>
+  </jnt-form-item>
+
+  <jnt-form-item>
+    <jnt-col [span]="3">
+      <jnt-form-label for="labels">Labels</jnt-form-label>
+    </jnt-col>
+    <jnt-col [span]="9">
+      <jnt-form-control name="labels">
+        <jnt-select valueField="value"
+                    labelField="label"
+                    formControlName="labels"
+                    placeholder="Labels"
+                    [mode]="selectMode.multiple">
+          <jnt-select-option *ngFor="let option of options"
+                             [label]="option.label"
+                             [value]="option.value">
+          </jnt-select-option>
+        </jnt-select>
       </jnt-form-control>
     </jnt-col>
   </jnt-form-item>
