@@ -42,8 +42,8 @@
 
 [tickets] {
   min-height: $gutter-normal;
-  margin-top: $gutter-normal;
-  margin-bottom: $gutter-normal;
+  padding-bottom: $gutter-big;
+  padding-top: $gutter-normal;
   &:empty {
     margin: 0;
   }
@@ -74,3 +74,6 @@
   transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.cdk-drag-placeholder {
+  opacity: .5;
+}

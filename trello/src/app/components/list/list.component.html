@@ -23,6 +23,8 @@
 
 <jnt-stack [align]="ui.flex.align.stretch" *ngIf="!!list"
            tickets
+           [id]="'list_' + list.id"
+           [cdkDropListConnectedTo]="connections"
            cdkDropList
            [cdkDropListData]="tickets"
            (cdkDropListDropped)="droppedTicket($event)">

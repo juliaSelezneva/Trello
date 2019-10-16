@@ -20,6 +20,8 @@ export class ListComponent implements OnInit {
   title: string;
   ui = UI;
   titleControl = new FormControl();
+  tickets: Ticket[] = [];
+  loading: boolean;
 
   listForm = this.fb.group({
     title: this.titleControl
@@ -27,12 +29,7 @@ export class ListComponent implements OnInit {
 
   @ViewChild('control', {static: true}) control: ElementRef;
 
-  constructor(private fb: FormBuilder,
-              public element: ElementRef,
-              private listService: ListService,
-              private ticketService: TicketService) {
-  }
-
+  @Input() connections: string[] = [];
 
   @Input()
   set list(list: List) {
@@ -46,8 +43,11 @@ export class ListComponent implements OnInit {
     return this._list;
   }
 
-  tickets: Ticket[] = [];
-  loading: boolean;
+  constructor(private fb: FormBuilder,
+              public element: ElementRef,
+              private listService: ListService,
+              private ticketService: TicketService) {
+  }
 
   private load(): void {
     // const tickets = JSON.parse(localStorage.getItem('tickets'));

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket';
 import { Signals, SignalType } from './in-memory-data.service';
@@ -14,6 +14,8 @@ export class TicketService {
   };
 
   private ticketsUrl = 'api/tickets';
+
+  signal = SignalType;
 
   constructor(private http: HttpClient, private signals: Signals) {
   }
@@ -29,14 +31,14 @@ export class TicketService {
     );
   }
 
-  addTicket(list: number, ticket: {[key: string]: any}): Observable<Ticket> {
+  addTicket(list: number, ticket: { [key: string]: any }): Observable<Ticket> {
     return this.http.post<Ticket>(this.ticketsUrl, Object.assign(ticket, {list: list}), this.httpOptions)
-      .pipe(finally(()=> this.signals.dispatch(SignalType.changes)));
+      // .pipe(finalize(() => this.signals.dispatch(this.signal.changes)));
   }
 
-  updateTicket(id: number, ticket: {[key: string]: any}): Observable<Ticket> {
+  updateTicket(id: number, ticket: { [key: string]: any }): Observable<Ticket> {
     return this.http.put<Ticket>(this.ticketsUrl, ticket, this.httpOptions)
-      .pipe(map(() => Object.assign(new Ticket(), ticket)));
+      // .pipe(map(() => Object.assign(new Ticket(), ticket)), finalize(() => this.signals.dispatch(this.signal.changes)));
   }
 
 }

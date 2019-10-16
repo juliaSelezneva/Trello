@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../../services/list.service';
 import { List } from '../../models/list';
 import { Ticket } from '../../models/ticket';
 import { finalize } from 'rxjs/operators';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-kanban',
@@ -18,6 +19,7 @@ export class KanbanComponent implements OnInit {
   lists: List[] = [];
   ticket: Ticket;
   loading: boolean;
+  connections: string[];
 
   constructor(private fb: FormBuilder,
               private listService: ListService) {
@@ -31,11 +33,22 @@ export class KanbanComponent implements OnInit {
     // this.lists = JSON.parse(localStorage.getItem('lists'));
     this.loading = true;
     this.listService.getLists().pipe(finalize(() => this.loading = false))
-      .subscribe(lists => this.lists = lists);
+      .subscribe(lists => {
+        this.lists = lists;
+        this.connections = lists.map(list => `list_${list.id}`);
+      });
   }
 
   track(index, list: List) {
     return list.id;
+  }
+
+  dropped(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+        this.lists,
+        event.previousIndex,
+        event.currentIndex
+      );
   }
 }
 

@@ -1,35 +1,33 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { List } from '../models/list';
 import { Label } from '../models/enum';
 import { Ticket } from '../models/ticket';
+
+const DB_KEY = 'db';
 
 export enum SignalType {
   changes = 1
 }
 
-const DB_KEY = 'db';
-
-@Injectable('root')
+@Injectable({
+  providedIn: 'root',
+})
 export class Signals {
+  @Output()
   signal = new EventEmitter<SignalType>();
 
   dispatch(signal: SignalType) {
     this.signal.emit(signal);
-
   }
 }
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class InMemoryDataService implements InMemoryDbService {
 
-
-
   constructor(private signals: Signals) {
-
   }
 
   createDb() {
@@ -49,18 +47,17 @@ export class InMemoryDataService implements InMemoryDbService {
       new Ticket('Refactor list', 6, new Date(2019, 9, 25), '5h 30m', null, 13),
     ];
 
-    const initial = {lists, tickets};
+    // const initial = {lists, tickets};
 
-    const db = JSON.parse(localStorage.getItem(DB_KEY)) || initial;
-    console.log(db);
+    // const db = JSON.parse(localStorage.getItem(DB_KEY)) || initial;
+    //
+    // this.signals.signal.subscribe(type => {
+    //   if (type === SignalType.changes) {
+    //     localStorage.setItem(DB_KEY, JSON.stringify(db));
+    //   }
+    // });
 
-    this.signals.signal.subscribe(type=>{
-      if(type == SignalType.changes) {
-        localStorage.setItem(DB_KEY, JSON.stringify(db));
-      }
-    });
-
-    return db;
+    return {lists, tickets};
   }
 
   genId(lists: List[]): number {
