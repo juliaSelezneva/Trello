@@ -45,7 +45,8 @@ export class EditTicketComponent {
     title: [[], Validators.required],
     estimate: [],
     dueDate: [],
-    labels: []
+    labels: [],
+    list: []
   });
 
   @Output()

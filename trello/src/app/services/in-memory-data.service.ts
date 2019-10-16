@@ -4,17 +4,41 @@ import { List } from '../models/list';
 import { Label } from '../models/enum';
 import { Ticket } from '../models/ticket';
 
+export enum SignalType {
+  changes = 1
+}
+
+const DB_KEY = 'db';
+
+@Injectable('root')
+export class Signals {
+  signal = new EventEmitter<SignalType>();
+
+  dispatch(signal: SignalType) {
+    this.signal.emit(signal);
+
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })
 
 export class InMemoryDataService implements InMemoryDbService {
+
+
+
+  constructor(private signals: Signals) {
+
+  }
+
   createDb() {
+
     const lists = [
       new List('Issue', 11),
       new List('Doing', 12),
-      new List('Done',  13),
-      new List('Delay',  14),
+      new List('Done', 13),
+      new List('Delay', 14),
     ];
     const tickets = [
       new Ticket('Create kanban component', 1, new Date(2019, 9, 3), '2h', [Label.delay, Label.doing], 11),
@@ -24,7 +48,19 @@ export class InMemoryDataService implements InMemoryDbService {
       new Ticket('Sort tickets', 5, new Date(2019, 10, 20), null, null, 13),
       new Ticket('Refactor list', 6, new Date(2019, 9, 25), '5h 30m', null, 13),
     ];
-    return {lists, tickets};
+
+    const initial = {lists, tickets};
+
+    const db = JSON.parse(localStorage.getItem(DB_KEY)) || initial;
+    console.log(db);
+
+    this.signals.signal.subscribe(type=>{
+      if(type == SignalType.changes) {
+        localStorage.setItem(DB_KEY, JSON.stringify(db));
+      }
+    });
+
+    return db;
   }
 
   genId(lists: List[]): number {

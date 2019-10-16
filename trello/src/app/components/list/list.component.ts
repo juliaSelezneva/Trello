@@ -36,8 +36,10 @@ export class ListComponent implements OnInit {
 
   @Input()
   set list(list: List) {
-    this._list = list;
-    this.load();
+    if (!this.list || list.id !== this.list.id) {
+      this._list = list;
+      this.load();
+    }
   }
 
   get list() {
@@ -47,17 +49,14 @@ export class ListComponent implements OnInit {
   tickets: Ticket[] = [];
   loading: boolean;
 
-  private load(list): void {
-    // this.loading = true;
-
-    const tickets = JSON.parse(localStorage.getItem('tickets'));
-
-
-    // this.ticketService.getTickets(this.list.id)
-    //   .pipe(finalize(() => this.loading = false))
-    //   .subscribe(tickets => {
-    //     this.tickets = tickets;
-    //   });
+  private load(): void {
+    // const tickets = JSON.parse(localStorage.getItem('tickets'));
+    this.loading = true;
+    this.ticketService.getTickets(this.list.id)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe(tickets => {
+        this.tickets = tickets;
+      });
   }
 
   droppedTicket(event: CdkDragDrop<string[]>) {

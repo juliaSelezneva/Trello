@@ -28,10 +28,10 @@ export class KanbanComponent implements OnInit {
   }
 
   load(): void {
-    this.lists = JSON.parse(localStorage.getItem('lists'));
-    // this.loading = true;
-    // this.listService.getLists().pipe(finalize(() => this.loading = false))
-    //   .subscribe(lists => this.lists = lists);
+    // this.lists = JSON.parse(localStorage.getItem('lists'));
+    this.loading = true;
+    this.listService.getLists().pipe(finalize(() => this.loading = false))
+      .subscribe(lists => this.lists = lists);
   }
 
   track(index, list: List) {

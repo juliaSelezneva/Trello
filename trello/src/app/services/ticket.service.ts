@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket';
+import { Signals, SignalType } from './in-memory-data.service';
 
 @Injectable({providedIn: 'root'})
 
@@ -14,7 +15,7 @@ export class TicketService {
 
   private ticketsUrl = 'api/tickets';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private signals: Signals) {
   }
 
   getTicket(id: number): Observable<Ticket> {
@@ -29,7 +30,8 @@ export class TicketService {
   }
 
   addTicket(list: number, ticket: {[key: string]: any}): Observable<Ticket> {
-    return this.http.post<Ticket>(this.ticketsUrl, Object.assign(ticket, {list: list}), this.httpOptions);
+    return this.http.post<Ticket>(this.ticketsUrl, Object.assign(ticket, {list: list}), this.httpOptions)
+      .pipe(finally(()=> this.signals.dispatch(SignalType.changes)));
   }
 
   updateTicket(id: number, ticket: {[key: string]: any}): Observable<Ticket> {

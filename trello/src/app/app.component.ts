@@ -40,10 +40,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    const serialLists = JSON.stringify(this.lists);
-    const serialTickets = JSON.stringify(this.tickets);
-    localStorage.setItem('lists', serialLists);
-    localStorage.setItem('tickets', serialTickets);
+    // const serialLists = JSON.stringify(this.lists);
+    // const serialTickets = JSON.stringify(this.tickets);
+    // localStorage.setItem('lists', serialLists);
+    // localStorage.setItem('tickets', serialTickets);
   }
 
   ngAfterViewInit() {
