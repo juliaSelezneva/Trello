@@ -47,17 +47,17 @@ export class InMemoryDataService implements InMemoryDbService {
       new Ticket('Refactor list', 6, new Date(2019, 9, 25), '5h 30m', null, 13),
     ];
 
-    // const initial = {lists, tickets};
+    const initial = {lists, tickets};
 
-    // const db = JSON.parse(localStorage.getItem(DB_KEY)) || initial;
-    //
-    // this.signals.signal.subscribe(type => {
-    //   if (type === SignalType.changes) {
-    //     localStorage.setItem(DB_KEY, JSON.stringify(db));
-    //   }
-    // });
+    const db = JSON.parse(localStorage.getItem(DB_KEY)) || initial;
 
-    return {lists, tickets};
+    this.signals.signal.subscribe(type => {
+      if (type === SignalType.changes) {
+        localStorage.setItem(DB_KEY, JSON.stringify(db));
+      }
+    });
+
+    return db;
   }
 
   genId(lists: List[]): number {

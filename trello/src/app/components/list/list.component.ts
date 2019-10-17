@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
   loading: boolean;
 
   listForm = this.fb.group({
+    id: [],
     title: this.titleControl
   });
 
@@ -37,6 +38,7 @@ export class ListComponent implements OnInit {
       this._list = list;
       this.load();
     }
+    this.listForm.patchValue(list as { [key: string]: any });
   }
 
   get list() {
@@ -50,13 +52,21 @@ export class ListComponent implements OnInit {
   }
 
   private load(): void {
-    // const tickets = JSON.parse(localStorage.getItem('tickets'));
     this.loading = true;
     this.ticketService.getTickets(this.list.id)
       .pipe(finalize(() => this.loading = false))
       .subscribe(tickets => {
         this.tickets = tickets;
       });
+  }
+
+  edit(): void {
+    // !this.list.title ? this.titleControl.patchValue(title) : title = list.title;
+    this.listService.updateList(this.list.id, this.listForm.getRawValue())
+      .subscribe(list => {
+        this.list = list;
+      });
+
   }
 
   droppedTicket(event: CdkDragDrop<string[]>) {

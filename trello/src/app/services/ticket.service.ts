@@ -15,8 +15,6 @@ export class TicketService {
 
   private ticketsUrl = 'api/tickets';
 
-  signal = SignalType;
-
   constructor(private http: HttpClient, private signals: Signals) {
   }
 
@@ -33,12 +31,12 @@ export class TicketService {
 
   addTicket(list: number, ticket: { [key: string]: any }): Observable<Ticket> {
     return this.http.post<Ticket>(this.ticketsUrl, Object.assign(ticket, {list: list}), this.httpOptions)
-      // .pipe(finalize(() => this.signals.dispatch(this.signal.changes)));
+      .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
   }
 
   updateTicket(id: number, ticket: { [key: string]: any }): Observable<Ticket> {
     return this.http.put<Ticket>(this.ticketsUrl, ticket, this.httpOptions)
-      // .pipe(map(() => Object.assign(new Ticket(), ticket)), finalize(() => this.signals.dispatch(this.signal.changes)));
+      .pipe(map(() => Object.assign(new Ticket(), ticket)), finalize(() => this.signals.dispatch(SignalType.changes)));
   }
 
 }

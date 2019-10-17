@@ -2,7 +2,7 @@
            [align]="ui.flex.align.center">
   <jnt-form [formGroup]="listForm">
     <input #control formControlName="title" input
-           (blur)="!list.title ? titleControl.patchValue(title) : title = list.title">
+           (blur)="edit()">
   </jnt-form>
   <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.stack.gutter.tiny"
              *ngIf="tickets.length > 1">
