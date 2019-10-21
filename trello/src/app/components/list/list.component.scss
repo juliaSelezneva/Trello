@@ -15,7 +15,11 @@
   position: relative;
 }
 
-[input] {
+[form] {
+  flex: 1;
+}
+
+input {
   border: 1px solid transparent;
   background-color: transparent;
   border-radius: $corner-small;
@@ -23,8 +27,22 @@
   cursor: pointer;
   min-height: 28px;
   &:focus {
-    border-color: $red-color;
+    border-color: $fail-color;
     outline: 0;
+  }
+}
+
+[stack] {
+  position: relative;
+  [overlay] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, .5);
+    justify-content: flex-end;
+    align-items: center;
   }
 }
 

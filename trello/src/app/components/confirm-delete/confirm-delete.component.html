@@ -1,0 +1,5 @@
+<span>{{message}}</span>
+<jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.center" footer>
+  <jnt-button text="OK" (click)="deleted.emit()"></jnt-button>
+  <jnt-button text="Cancel" (click)="closed.emit()"></jnt-button>
+</jnt-stack>

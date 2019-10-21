@@ -4,6 +4,7 @@ import { finalize, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket';
 import { Signals, SignalType } from './in-memory-data.service';
+import { List } from '../models/list';
 
 @Injectable({providedIn: 'root'})
 
@@ -37,6 +38,12 @@ export class TicketService {
   updateTicket(id: number, ticket: { [key: string]: any }): Observable<Ticket> {
     return this.http.put<Ticket>(this.ticketsUrl, ticket, this.httpOptions)
       .pipe(map(() => Object.assign(new Ticket(), ticket)), finalize(() => this.signals.dispatch(SignalType.changes)));
+  }
+
+  deleteTicket(id: number): Observable<Ticket> {
+    const url = `${this.ticketsUrl}/${id}`;
+    return this.http.delete<Ticket>(url, this.httpOptions)
+      .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
   }
 
 }

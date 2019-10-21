@@ -1,22 +1,35 @@
 <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between"
            [align]="ui.flex.align.center">
-  <jnt-form [formGroup]="listForm">
-    <input #control formControlName="title" input
-           (blur)="edit()">
+  <jnt-form [formGroup]="listForm" form>
+    <div stack>
+      <input formControlName="title"
+             (blur)="edit()">
+      <div [style.display]="progress.editing ? 'flex' : 'none'" overlay>
+        <jnt-spinner [size]="ui.sizes.small"></jnt-spinner>
+      </div>
+    </div>
   </jnt-form>
-  <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.stack.gutter.tiny"
-             *ngIf="tickets.length > 1">
-    <jnt-button [icon]="ui.icons.font.arrowLeft"
+  <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.stack.gutter.tiny">
+    <ng-container *ngIf="tickets.length > 1">
+      <jnt-button [icon]="ui.icons.font.arrowLeft"
+                  [outline]="ui.outline.ghost"
+                  [size]="ui.sizes.tiny"
+                  [scheme]="ui.schemes.secondary"
+                  up (click)="tickets.sort(compareUp)">
+      </jnt-button>
+      <jnt-button [icon]="ui.icons.font.arrowLeft"
+                  [outline]="ui.outline.ghost"
+                  [size]="ui.sizes.tiny"
+                  [scheme]="ui.schemes.secondary"
+                  down (click)="tickets.sort(compareDown)">
+      </jnt-button>
+    </ng-container>
+    <jnt-button [icon]="ui.icons.delete"
                 [outline]="ui.outline.ghost"
                 [size]="ui.sizes.tiny"
-                [scheme]="ui.schemes.secondary"
-                up (click)="tickets.sort(compareUp)">
-    </jnt-button>
-    <jnt-button [icon]="ui.icons.font.arrowLeft"
-                [outline]="ui.outline.ghost"
-                [size]="ui.sizes.tiny"
-                [scheme]="ui.schemes.secondary"
-                down (click)="tickets.sort(compareDown)">
+                [scheme]="ui.schemes.fail"
+                [loading]="progress.deleting"
+                (click)="confirm()">
     </jnt-button>
   </jnt-stack>
 </jnt-stack>
@@ -29,22 +42,23 @@
            [cdkDropListData]="tickets"
            (cdkDropListDropped)="droppedTicket($event)">
   <ng-container *ngIf="tickets.length; else nodata">
-    <app-ticket *ngFor="let ticket of tickets; trackBy: track" [ticket]="ticket" cdkDrag></app-ticket>
+    <app-ticket *ngFor="let ticket of tickets; trackBy: track" [ticket]="ticket" cdkDrag
+                (deleted)="load()"></app-ticket>
   </ng-container>
 </jnt-stack>
 
-<app-add-ticket (added)="load()" [list]="list" [tickets]="tickets" [loading]="loading"></app-add-ticket>
+<app-add-ticket (added)="load()" [list]="list" [tickets]="tickets"></app-add-ticket>
 
 <ng-template #nodata>
-  <span *ngIf="!loading; else loadingTemplate" nodata>No tickets</span>
+  <span *ngIf="!progress.tickets; else loadingTemplate" nodata>No tickets</span>
 </ng-template>
 
 <ng-template #loadingTemplate>
-  <ng-container *ngIf="!tickets.length && loading">
+  <ng-container *ngIf="!tickets.length && progress.tickets">
     <jnt-skeleton [lines]="4"></jnt-skeleton>
   </ng-container>
 </ng-template>
 
-<div spin *ngIf="tickets.length && loading">
+<div spin *ngIf="tickets.length && progress.tickets">
   <jnt-spinner></jnt-spinner>
 </div>

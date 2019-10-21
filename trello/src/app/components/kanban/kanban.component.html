@@ -5,6 +5,7 @@
   <ng-container *ngIf="!!lists.length; else nodata">
     <app-list *ngFor="let list of lists; trackBy: track"
               [list]="list" [connections]="connections"
+              (deleted)="load()"
               cdkDrag>
     </app-list>
   </ng-container>

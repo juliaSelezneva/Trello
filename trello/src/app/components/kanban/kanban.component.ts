@@ -44,10 +44,10 @@ export class KanbanComponent implements OnInit {
 
   dropped(event: CdkDragDrop<string[]>) {
     moveItemInArray(
-        this.lists,
-        event.previousIndex,
-        event.currentIndex
-      );
+      this.lists,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }
 

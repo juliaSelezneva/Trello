@@ -32,5 +32,11 @@ export class ListService {
     return this.http.put<List>(this.listsUrl, list, this.httpOptions)
       .pipe(map(() => Object.assign(new List(), list)), finalize(() => this.signals.dispatch(SignalType.changes)));
   }
+
+  deleteList(id: number): Observable<List> {
+    const url = `${this.listsUrl}/${id}`;
+    return this.http.delete<List>(url, this.httpOptions)
+      .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
+  }
 }
 
