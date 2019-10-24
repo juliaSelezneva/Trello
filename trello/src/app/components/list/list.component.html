@@ -2,8 +2,10 @@
            [align]="ui.flex.align.center">
   <jnt-form [formGroup]="listForm" form>
     <div stack>
-      <input formControlName="title"
-             (blur)="edit()">
+      <input #titleControl
+             formControlName="title"
+             (blur)="edit()"
+             (keyup.enter)="edit(); titleControl.blur()">
       <div [style.display]="progress.editing ? 'flex' : 'none'" overlay>
         <jnt-spinner [size]="ui.sizes.small"></jnt-spinner>
       </div>
@@ -15,13 +17,13 @@
                   [outline]="ui.outline.ghost"
                   [size]="ui.sizes.tiny"
                   [scheme]="ui.schemes.secondary"
-                  up (click)="tickets.sort(compareUp)">
+                  up (click)="sort(sortType.up)">
       </jnt-button>
       <jnt-button [icon]="ui.icons.font.arrowLeft"
                   [outline]="ui.outline.ghost"
                   [size]="ui.sizes.tiny"
                   [scheme]="ui.schemes.secondary"
-                  down (click)="tickets.sort(compareDown)">
+                  down (click)="sort(sortType.down)">
       </jnt-button>
     </ng-container>
     <jnt-button [icon]="ui.icons.delete"

@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ElementRef, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { ModalOptions, ModalService, UI } from 'junte-ui';
 import { List } from '../../models/list';
 import { FormBuilder, FormControl } from '@angular/forms';
@@ -6,8 +6,9 @@ import { ListService } from '../../services/list.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TicketService } from '../../services/ticket.service';
 import { Ticket } from '../../models/ticket';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { compareDown, compareUp, SortType } from '../../utils/sort';
 
 @Component({
   selector: 'app-list',
@@ -18,15 +19,17 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 export class ListComponent implements OnInit {
 
   private _list: List;
-  title: string;
   ui = UI;
+  sortType = SortType;
   titleControl = new FormControl();
+  orderControl = new FormControl();
   tickets: Ticket[] = [];
 
   progress = {tickets: false, deleting: false, editing: false};
 
   listForm = this.fb.group({
     id: [],
+    order: [],
     title: this.titleControl
   });
 
@@ -48,12 +51,17 @@ export class ListComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder,
-              public element: ElementRef,
               private listService: ListService,
               private ticketService: TicketService,
               private modalService: ModalService,
               private injector: Injector,
-              private cfr: ComponentFactoryResolver) {
+              private cfr: ComponentFactoryResolver,
+              public element: ElementRef) {
+  }
+
+  ngOnInit() {
+    this.titleControl.setValue(this.list.title);
+    this.orderControl.setValue(this.list.order);
   }
 
   private load(): void {
@@ -73,13 +81,19 @@ export class ListComponent implements OnInit {
   }
 
   edit(): void {
-    // !this.list.title ? this.titleControl.patchValue(title) : title = list.title;
+    if (this.titleControl.value === this.list.title) {
+      return;
+    }
+
+    if (!this.titleControl.value) {
+      this.titleControl.setValue(this.list.title);
+    } else {
+      this.list.title = this.titleControl.value;
+    }
     this.progress.editing = true;
     this.listService.updateList(this.list.id, this.listForm.getRawValue())
       .pipe(finalize(() => this.progress.editing = false))
-      .subscribe(list => {
-        this.list = list;
-      });
+      .subscribe(list => this.list = list);
 
   }
 
@@ -121,29 +135,14 @@ export class ListComponent implements OnInit {
     return ticket.id;
   }
 
-  compareUp(a, b) {
-    if (a.title < b.title) {
-      return -1;
+  sort(type: SortType) {
+    switch (type) {
+      case SortType.up:
+        this.tickets.sort((a, b) => compareUp(a, b, 'title'));
+        break;
+      case SortType.down:
+        this.tickets.sort((a, b) => compareDown(a, b, 'title'));
+        break;
     }
-    if (a.title > b.title) {
-      return 1;
-    }
-    return 0;
-  }
-
-  compareDown(a, b) {
-    if (a.title > b.title) {
-      return -1;
-    }
-    if (a.title < b.title) {
-      return 1;
-    }
-    return 0;
-  }
-
-  ngOnInit() {
-    this.title = this.list.title;
-    this.titleControl.setValue(this.list.title);
-    this.titleControl.valueChanges.subscribe(title => this.list.title = title);
   }
 }

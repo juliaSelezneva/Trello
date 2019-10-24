@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { List } from '../models/list';
 import { finalize, map } from 'rxjs/operators';
 import { Signals, SignalType } from './in-memory-data.service';
-import { Ticket } from '../models/ticket';
 
 @Injectable({providedIn: 'root'})
 
