@@ -23,8 +23,23 @@ export class ListService {
   }
 
   addList(list: { [key: string]: any }): Observable<List> {
-    return this.http.post<List>(this.listsUrl, list, this.httpOptions)
-      .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
+
+    //
+
+    return Observable.create(o => {
+      this.http.get<List[]>(this.listsUrl).subscribe(lists =>{
+        const maxOrder = 100;
+
+        list['order'] = maxOrder;
+
+        return this.http.post<List>(this.listsUrl, list, this.httpOptions)
+          .pipe(finalize(() => this.signals.dispatch(SignalType.changes)))
+          .subscribe(list => {
+            o.next(list);
+            o.complete();
+          });
+      });
+    });
   }
 
   updateList(id: number, list: { [key: string]: any }): Observable<List> {

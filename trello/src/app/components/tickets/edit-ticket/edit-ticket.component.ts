@@ -43,6 +43,7 @@ export class EditTicketComponent {
   editForm = this.fb.group({
     id: [],
     title: [[], Validators.required],
+    order: [],
     estimate: [],
     dueDate: [],
     labels: [],

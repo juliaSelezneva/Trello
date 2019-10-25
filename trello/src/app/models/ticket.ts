@@ -7,6 +7,7 @@ export class Ticket {
   // }
 
   constructor(public title: string = null,
+              public order: number = null,
               public id: number = null,
               public dueDate: Date = null,
               public estimate: string = null,

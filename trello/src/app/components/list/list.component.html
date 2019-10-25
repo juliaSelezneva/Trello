@@ -6,7 +6,7 @@
              formControlName="title"
              (blur)="edit()"
              (keyup.enter)="edit(); titleControl.blur()">
-      <div [style.display]="progress.editing ? 'flex' : 'none'" overlay>
+      <div [style.display]="progress.editing ? 'flex' : 'none'" spin>
         <jnt-spinner [size]="ui.sizes.small"></jnt-spinner>
       </div>
     </div>

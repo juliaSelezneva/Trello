@@ -22,7 +22,8 @@ export class AddTicketComponent {
 
   ticketForm = this.fb.group({
     id: [],
-    title: [null, [Validators.required]]
+    title: [null, [Validators.required]],
+    order: []
   });
 
   @Input() list: List;

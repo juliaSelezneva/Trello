@@ -69,7 +69,7 @@ export class ListComponent implements OnInit {
     this.ticketService.getTickets(this.list.id)
       .pipe(finalize(() => this.progress.tickets = false))
       .subscribe(tickets => {
-        this.tickets = tickets;
+        this.tickets = tickets.sort((a, b) => compareUp(a, b, 'order'));
       });
   }
 
@@ -121,6 +121,13 @@ export class ListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      this.progress.tickets = true;
+      this.tickets.forEach((ticket, index) => {
+        ticket.order = index;
+        this.ticketService.updateTicket(ticket.id, ticket as {[p: string]: any})
+          .pipe(finalize(() => this.progress.tickets = false))
+          .subscribe();
+      });
     } else {
       transferArrayItem(
         event.previousContainer.data,

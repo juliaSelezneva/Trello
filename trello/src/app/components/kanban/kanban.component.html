@@ -6,7 +6,7 @@
     <app-list *ngFor="let list of lists; trackBy: track"
               [list]="list" [connections]="connections"
               (deleted)="load()"
-              cdkDrag [cdkDragData]="list">
+              cdkDrag>
     </app-list>
   </ng-container>
   <app-add-list (added)="load()" [list]="list"></app-add-list>

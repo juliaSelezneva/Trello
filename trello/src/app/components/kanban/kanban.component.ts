@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
 import { ListService } from '../../services/list.service';
 import { List } from '../../models/list';
 import { Ticket } from '../../models/ticket';
 import { finalize } from 'rxjs/operators';
-import { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragSortEvent, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { compareUp } from '../../utils/sort';
 
 @Component({
