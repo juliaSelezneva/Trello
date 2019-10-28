@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { List } from '../models/list';
-import { finalize, map } from 'rxjs/operators';
+import { finalize, map, max } from 'rxjs/operators';
 import { Signals, SignalType } from './in-memory-data.service';
 
 @Injectable({providedIn: 'root'})
@@ -24,18 +24,18 @@ export class ListService {
 
   addList(list: { [key: string]: any }): Observable<List> {
 
-    //
+    return new Observable<List>(o => {
+      this.http.get<List[]>(this.listsUrl).pipe(max<any>((a: List, b: List) => a.order < b.order ? -1 : 1),
+      )
+        .subscribe(lists => {
+        // const maxOrder = 100;
+        //
+        // list['order'] = maxOrder;
 
-    return Observable.create(o => {
-      this.http.get<List[]>(this.listsUrl).subscribe(lists =>{
-        const maxOrder = 100;
-
-        list['order'] = maxOrder;
-
-        return this.http.post<List>(this.listsUrl, list, this.httpOptions)
+        this.http.post<List>(this.listsUrl, list, this.httpOptions)
           .pipe(finalize(() => this.signals.dispatch(SignalType.changes)))
-          .subscribe(list => {
-            o.next(list);
+          .subscribe(() => {
+            o.next(),
             o.complete();
           });
       });
