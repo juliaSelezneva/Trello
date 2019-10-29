@@ -42,7 +42,7 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
     DragDropModule,
     ArrayPipesModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false, delay: 2000 }
+      InMemoryDataService, { dataEncapsulation: false }
     )
   ],
   entryComponents: [

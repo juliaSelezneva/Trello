@@ -4,7 +4,6 @@ import { finalize, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket';
 import { Signals, SignalType } from './in-memory-data.service';
-import { List } from '../models/list';
 
 @Injectable({providedIn: 'root'})
 
@@ -31,8 +30,19 @@ export class TicketService {
   }
 
   addTicket(list: number, ticket: { [key: string]: any }): Observable<Ticket> {
-    return this.http.post<Ticket>(this.ticketsUrl, Object.assign(ticket, {list: list}), this.httpOptions)
-      .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
+    return new Observable<Ticket>(o => {
+      this.http.get<Ticket[]>(this.ticketsUrl)
+        .subscribe(tickets => {
+          const max = tickets.length > 0 ? tickets.reduce((prev, current) =>
+            (current.order > prev ? current.order : prev), tickets[0].order) : 0;
+          this.http.post<Ticket>(this.ticketsUrl, {...ticket, list: list, order: max + 1}, this.httpOptions)
+            .pipe(finalize(() => this.signals.dispatch(SignalType.changes)))
+            .subscribe(added => {
+              o.next(added);
+              o.complete();
+            });
+        });
+    });
   }
 
   updateTicket(id: number, ticket: { [key: string]: any }): Observable<Ticket> {
