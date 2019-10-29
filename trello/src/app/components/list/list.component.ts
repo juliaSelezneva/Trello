@@ -122,12 +122,6 @@ export class ListComponent implements OnInit {
         event.currentIndex
       );
       this.progress.tickets = true;
-      this.tickets.forEach((ticket, index) => {
-        ticket.order = index;
-        this.ticketService.updateTicket(ticket.id, ticket as {[p: string]: any})
-          .pipe(finalize(() => this.progress.tickets = false))
-          .subscribe();
-      });
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -136,6 +130,14 @@ export class ListComponent implements OnInit {
         event.currentIndex
       );
     }
+
+    this.tickets.forEach((ticket, index) => {
+      ticket.order = index;
+      ticket.list = this.list.id;
+      this.ticketService.updateTicket(ticket.id, ticket as { [p: string]: any })
+        .pipe(finalize(() => this.progress.tickets = false))
+        .subscribe();
+    });
   }
 
   track(index, ticket: Ticket) {
