@@ -1,0 +1,4 @@
+<jnt-stack [type]="ui.stack.type.horizontal">
+  <!--<jnt-link *ngFor="let kanban of kanbans" [title]="kanban.title" [source]="['/kanbans/', kanban.id]"></jnt-link>-->
+  <a *ngFor="let kanban of kanbans" routerLink="/kanbans/{{kanban.id}}">{{kanban.title}}</a>
+</jnt-stack>

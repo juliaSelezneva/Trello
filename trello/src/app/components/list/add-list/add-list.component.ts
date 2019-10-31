@@ -5,6 +5,7 @@ import { List } from '../../../models/list';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ListService } from '../../../services/list.service';
 import { finalize } from 'rxjs/operators';
+import { Kanban } from '../../../models/kanban';
 
 @Component({
   selector: 'app-add-list',
@@ -19,10 +20,11 @@ export class AddListComponent {
   loading: boolean;
 
   @Input() list: List;
+  @Input() kanban: Kanban;
 
   listForm = this.fb.group({
     title: [null, Validators.required],
-    order: []
+    order: [],
   });
 
   @Output()
@@ -35,7 +37,7 @@ export class AddListComponent {
   add(): void {
     this.loading = true;
 
-    this.listService.addList(this.listForm.getRawValue())
+    this.listService.addList(this.kanban.id, this.listForm.getRawValue())
       .pipe(finalize(() => this.loading = false))
       .subscribe(list => {
         this.list = list;

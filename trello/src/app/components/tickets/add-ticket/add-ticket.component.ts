@@ -40,7 +40,6 @@ export class AddTicketComponent {
   add(): void {
     this.loading = true;
     this.ticketService.addTicket(this.list.id, this.ticketForm.getRawValue())
-    // .pipe(finalize(() => this.loadingChange.emit(false)))
       .pipe(finalize(() => this.loading = false))
       .subscribe(ticket => {
         this.ticket = ticket;

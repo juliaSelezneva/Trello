@@ -18,6 +18,7 @@ import { AddListComponent } from './components/list/add-list/add-list.component'
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
 import { ArrayPipesModule } from './pipes/array-pipes.module';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
     AddListComponent,
     AddTicketComponent,
     ConfirmDeleteComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,

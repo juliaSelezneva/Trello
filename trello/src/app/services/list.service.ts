@@ -18,17 +18,19 @@ export class ListService {
   constructor(private http: HttpClient, private signals: Signals) {
   }
 
-  getLists(): Observable<List[]> {
-    return this.http.get<List[]>(this.listsUrl);
+  getLists(kanban: number): Observable<List[]> {
+    return this.http.get<List[]>(this.listsUrl).pipe(
+      map(lists => lists.filter(list => list.kanban === kanban))
+    );
   }
 
-  addList(list: { [key: string]: any }): Observable<List> {
+  addList(kanban: number, list: { [key: string]: any }): Observable<List> {
     return new Observable<List>(o => {
       this.http.get<List[]>(this.listsUrl)
         .subscribe(lists => {
           const max = lists.length > 0 ? lists.reduce((prev, current) =>
             (current.order > prev ? current.order : prev), lists[0].order) : 0;
-          this.http.post<List>(this.listsUrl, {...list, order: max + 1}, this.httpOptions)
+          this.http.post<List>(this.listsUrl, {...list, kanban: kanban, order: max + 1}, this.httpOptions)
             .pipe(finalize(() => this.signals.dispatch(SignalType.changes)))
             .subscribe(added => {
               o.next(added);

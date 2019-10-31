@@ -30,6 +30,7 @@ export class ListComponent implements OnInit {
   listForm = this.fb.group({
     id: [],
     order: [],
+    kanban: [],
     title: this.titleControl
   });
 

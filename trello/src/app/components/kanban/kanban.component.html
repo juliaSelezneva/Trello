@@ -9,7 +9,7 @@
               cdkDrag>
     </app-list>
   </ng-container>
-  <app-add-list (added)="load()" [list]="list"></app-add-list>
+  <app-add-list (added)="load()" [list]="list" [kanban]="kanban"></app-add-list>
 </jnt-stack>
 
 <ng-template #nodata>
