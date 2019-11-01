@@ -51,16 +51,6 @@ export class KanbanComponent implements OnInit {
       });
   }
 
-  // load(): void {
-  //   this.loading = true;
-  //   this.listService.getLists(this.kanban.id)
-  //     .pipe(finalize(() => this.loading = false))
-  //     .subscribe(lists => {
-  //       this.lists = lists.sort((a, b) => compareUp(a, b, 'order'));
-  //       this.connections = lists.map(list => `list_${list.id}`);
-  //     });
-  // }
-
   track(index, list: List) {
     return list.id;
   }

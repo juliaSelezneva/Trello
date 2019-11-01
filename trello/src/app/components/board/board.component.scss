@@ -1,0 +1,54 @@
+@import "../../../assets/styles/variables";
+@import "../../../../node_modules/junte-ui/lib/assets/styles/variables";
+
+:host {
+  display: flex;
+}
+
+[preview] {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: flex-end;
+  padding: $gutter-normal $gutter-normal 0 $gutter-normal;
+  width: 200px;
+  height: 200px;
+  border: 1px solid $muted-color;
+  margin: 0 $gutter-large $gutter-large 0;
+  background-color: $primary-background;
+  a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: $gutter-normal 0;
+    border-top: 1px solid $muted-color;
+    text-decoration: none;
+  }
+  &[new] {
+    &:after {
+      content: '+';
+    }
+  }
+  &:hover {
+    &:after {
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+  &:after {
+    content: 'Open';
+    color: $white-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    opacity: 0;
+    z-index: -1;
+    transition: all .5s;
+  }
+}
