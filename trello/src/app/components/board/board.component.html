@@ -3,7 +3,13 @@
   <ng-container *ngIf="!!kanbans.length; else nodata">
     <div *ngFor="let kanban of kanbans" preview>
       <span>{{kanban.title}}</span>
-      <a routerLink="/kanbans/{{kanban.id}}" overlay>Open</a>
+      <div overlay>
+        <jnt-stack [type]="ui.stack.type.horizontal">
+          <jnt-link [icon]="ui.icons.view" [source]="['/kanbans', kanban.id]" [outline]="ui.outline.ghost"></jnt-link>
+          <jnt-button [icon]="ui.icons.edit" [outline]="ui.outline.ghost"></jnt-button>
+          <jnt-button [icon]="ui.icons.delete" [outline]="ui.outline.ghost"></jnt-button>
+        </jnt-stack>
+      </div>
     </div>
 
     <app-add-kanban [kanban]="kanban" (saved)="load()"></app-add-kanban>
@@ -12,7 +18,7 @@
 </jnt-stack>
 
 <ng-template #nodata>
-  <span *ngIf="!loading; else loadingTemplate">No lists</span>
+  <span *ngIf="!loading; else loadingTemplate">No kanbans</span>
 </ng-template>
 
 <ng-template #loadingTemplate>

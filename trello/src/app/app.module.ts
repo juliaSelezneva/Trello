@@ -46,7 +46,7 @@ import { AddKanbanComponent } from './components/kanban/add-kanban/add-kanban.co
     DragDropModule,
     ArrayPipesModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false, delay: 2000 }
+      InMemoryDataService, { dataEncapsulation: false }
     )
   ],
   entryComponents: [

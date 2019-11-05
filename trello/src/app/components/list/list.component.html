@@ -1,4 +1,4 @@
-<jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [justify]="ui.flex.justify.between"
+<jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.gutter.tiny" [justify]="ui.flex.justify.between"
            [align]="ui.flex.align.center">
   <jnt-form [formGroup]="listForm" form>
     <div stack>
@@ -11,7 +11,7 @@
       </div>
     </div>
   </jnt-form>
-  <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.stack.gutter.tiny">
+  <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.gutter.tiny">
     <ng-container *ngIf="tickets.length > 1">
       <jnt-button [icon]="ui.icons.font.arrowLeft"
                   [outline]="ui.outline.ghost"
