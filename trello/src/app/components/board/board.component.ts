@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UI } from 'junte-ui';
+import { Component, ComponentFactoryResolver, EventEmitter, Injector, OnInit, Output } from '@angular/core';
+import { ModalOptions, ModalService, UI } from 'junte-ui';
 import { Kanban } from '../../models/kanban';
 import { finalize } from 'rxjs/operators';
 import { KanbanService } from '../../services/kanban.service';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-board',

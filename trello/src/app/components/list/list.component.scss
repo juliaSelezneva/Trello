@@ -40,6 +40,7 @@ input {
   position: relative;
   [spin] {
     justify-content: flex-end;
+    color: $primary-color-light;
   }
 }
 
@@ -75,6 +76,7 @@ input {
   align-items: center;
   justify-content: center;
   padding: 0 $gutter-tiny;
+  color: $primary-color-light;
 }
 
 [nodata] {

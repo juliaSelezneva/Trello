@@ -1,8 +1,8 @@
 <jnt-block *ngIf="!!ticket" [padding]="ui.padding.small" [width]="ui.width.fluid">
-  <jnt-stack [gutter]="ui.stack.gutter.small" [align]="ui.flex.align.stretch">
+  <jnt-stack [gutter]="ui.gutter.small" [align]="ui.flex.align.stretch">
     <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [wrap]="ui.flex.wrap.noWrap">
       <jnt-link [title]="ticket.title" [source]="['/tickets/', ticket.id]"></jnt-link>
-      <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny" [wrap]="ui.flex.wrap.noWrap">
+      <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.gutter.tiny" [wrap]="ui.flex.wrap.noWrap">
         <jnt-button [size]="ui.sizes.tiny" [scheme]="ui.schemes.secondary" [icon]="ui.icons.font.edit"
                     [outline]="ui.outline.transparent" (click)="openModal()">
         </jnt-button>
@@ -16,7 +16,7 @@
       </jnt-stack>
     </jnt-stack>
 
-    <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.stack.gutter.tiny">
+    <jnt-stack [type]="ui.stack.type.horizontal" [gutter]="ui.gutter.tiny">
       <jnt-label *ngFor="let label of ticket.labels" [label]="label" [color]="ui.colors.greenDark"></jnt-label>
     </jnt-stack>
 

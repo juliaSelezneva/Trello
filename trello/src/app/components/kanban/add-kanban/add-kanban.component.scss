@@ -19,4 +19,8 @@
   color: $primary-color-light;
   cursor: pointer;
   font-size: 50px;
+  transition: all .5s;
+  &:hover {
+    border-color: $primary-color-light;
+  }
 }

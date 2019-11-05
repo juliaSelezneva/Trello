@@ -20,6 +20,7 @@ import { ArrayPipesModule } from './pipes/array-pipes.module';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 import { BoardComponent } from './components/board/board.component';
 import { AddKanbanComponent } from './components/kanban/add-kanban/add-kanban.component';
+import { PreviewKanbanComponent } from './components/kanban/preview-kanban/preview-kanban.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AddKanbanComponent } from './components/kanban/add-kanban/add-kanban.co
     ConfirmDeleteComponent,
     BoardComponent,
     AddKanbanComponent,
+    PreviewKanbanComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { AddKanbanComponent } from './components/kanban/add-kanban/add-kanban.co
     DragDropModule,
     ArrayPipesModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+      InMemoryDataService, { dataEncapsulation: false, delay: 2000 }
     )
   ],
   entryComponents: [

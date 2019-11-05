@@ -31,4 +31,10 @@ export class KanbanService {
     return this.http.post<Kanban>(this.kanbansUrl, kanban, this.httpOptions)
       .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
   }
+
+  deleteKanban(id: number): Observable<Kanban> {
+    const url = `${this.kanbansUrl}/${id}`;
+    return this.http.delete<Kanban>(url, this.httpOptions)
+      .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
+  }
 }

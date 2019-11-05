@@ -1,19 +1,10 @@
-<jnt-stack [type]="ui.stack.type.horizontal">
+<jnt-stack [type]="ui.stack.type.horizontal" [align]="ui.flex.align.stretch">
 
   <ng-container *ngIf="!!kanbans.length; else nodata">
-    <div *ngFor="let kanban of kanbans" preview>
-      <span>{{kanban.title}}</span>
-      <div overlay>
-        <jnt-stack [type]="ui.stack.type.horizontal">
-          <jnt-link [icon]="ui.icons.view" [source]="['/kanbans', kanban.id]" [outline]="ui.outline.ghost"></jnt-link>
-          <jnt-button [icon]="ui.icons.edit" [outline]="ui.outline.ghost"></jnt-button>
-          <jnt-button [icon]="ui.icons.delete" [outline]="ui.outline.ghost"></jnt-button>
-        </jnt-stack>
-      </div>
-    </div>
-
-    <app-add-kanban [kanban]="kanban" (saved)="load()"></app-add-kanban>
+     <app-preview-kanban *ngFor="let kanban of kanbans" [kanban]="kanban" (deleted)="load()"></app-preview-kanban>
   </ng-container>
+
+  <app-add-kanban [kanban]="kanban" (saved)="load()"></app-add-kanban>
 
 </jnt-stack>
 
@@ -30,5 +21,5 @@
 </ng-template>
 
 <div spin *ngIf="kanbans.length && loading">
-  <jnt-spinner></jnt-spinner>
+  <jnt-spinner [size]="ui.sizes.large"></jnt-spinner>
 </div>
