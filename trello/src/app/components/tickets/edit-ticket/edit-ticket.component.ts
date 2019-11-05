@@ -23,13 +23,11 @@ export class EditTicketComponent {
   labels = Label;
 
   options: any[] = [
-    { value: this.labels.delay, label: this.labels.delay },
-    { value: this.labels.doing, label: this.labels.doing },
-    { value: this.labels.done, label: this.labels.done },
-    { value: this.labels.toDo, label: this.labels.toDo },
+    {value: this.labels.delay, label: this.labels.delay},
+    {value: this.labels.doing, label: this.labels.doing},
+    {value: this.labels.done, label: this.labels.done},
+    {value: this.labels.toDo, label: this.labels.toDo},
   ];
-
-  @ContentChild('footer', {static: false}) footer: TemplateRef<any>;
 
   @Input() set ticket(ticket: Ticket) {
     this._ticket = ticket;

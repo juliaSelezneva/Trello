@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Signals } from './in-memory-data.service';
+import { Signals, SignalType } from './in-memory-data.service';
 import { Observable } from 'rxjs';
 import { Kanban } from '../models/kanban';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 
@@ -24,5 +25,10 @@ export class KanbanService {
 
   getKanbans(): Observable<Kanban[]> {
     return this.http.get<Kanban[]>(this.kanbansUrl);
+  }
+
+  addKanban(kanban: {[key: string]: any}): Observable<Kanban> {
+    return this.http.post<Kanban>(this.kanbansUrl, kanban, this.httpOptions)
+      .pipe(finalize(() => this.signals.dispatch(SignalType.changes)));
   }
 }

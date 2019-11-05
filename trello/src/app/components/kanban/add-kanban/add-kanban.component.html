@@ -1,0 +1,27 @@
+<div preview (click)="openModal()">
+  <jnt-icon [icon]="ui.icons.plus"></jnt-icon>
+</div>
+
+<ng-template #content>
+  <jnt-form [formGroup]="addForm" [loading]="loading" (submitted)="add()" [layout]="ui.form.layout.horizontal" jntValidation>
+    <jnt-form-item>
+      <jnt-col [span]="3">
+        <jnt-form-label for="title">Title</jnt-form-label>
+      </jnt-col>
+      <jnt-col [span]="9">
+        <jnt-form-control name="title">
+          <jnt-input formControlName="title" placeholder="Title"></jnt-input>
+          <jnt-form-message [type]="ui.form.validators.typeError.required">
+            This field is required
+          </jnt-form-message>
+        </jnt-form-control>
+      </jnt-col>
+    </jnt-form-item>
+
+    <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.center">
+      <jnt-button text="OK" [type]="ui.form.button.type.submit" [loading]="loading"></jnt-button>
+      <jnt-button text="Cancel" (click)="close()"></jnt-button>
+    </jnt-stack>
+  </jnt-form>
+</ng-template>
+

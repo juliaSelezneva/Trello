@@ -31,5 +31,4 @@ export class BoardComponent implements OnInit {
         this.kanbans = kanbans;
       });
   }
-
 }

@@ -1,0 +1,22 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../../node_modules/junte-ui/lib/assets/styles/variables";
+
+:host {
+  display: block;
+}
+
+[preview] {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: $gutter-normal $gutter-normal 0 $gutter-normal;
+  width: 200px;
+  height: 200px;
+  border: 1px solid $muted-color;
+  margin: 0 $gutter-large $gutter-large 0;
+  background-color: $primary-background;
+  color: $primary-color-light;
+  cursor: pointer;
+  font-size: 50px;
+}

@@ -19,6 +19,7 @@ import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.c
 import { ArrayPipesModule } from './pipes/array-pipes.module';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 import { BoardComponent } from './components/board/board.component';
+import { AddKanbanComponent } from './components/kanban/add-kanban/add-kanban.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { BoardComponent } from './components/board/board.component';
     AddTicketComponent,
     ConfirmDeleteComponent,
     BoardComponent,
+    AddKanbanComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,12 +46,13 @@ import { BoardComponent } from './components/board/board.component';
     DragDropModule,
     ArrayPipesModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+      InMemoryDataService, { dataEncapsulation: false, delay: 2000 }
     )
   ],
   entryComponents: [
     EditTicketComponent,
-    ConfirmDeleteComponent
+    ConfirmDeleteComponent,
+    AddKanbanComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

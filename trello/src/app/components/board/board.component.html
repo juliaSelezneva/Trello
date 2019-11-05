@@ -1,4 +1,28 @@
-<div *ngFor="let kanban of kanbans" preview>
-  <a routerLink="/kanbans/{{kanban.id}}">{{kanban.title}}</a>
+<jnt-stack [type]="ui.stack.type.horizontal">
+
+  <ng-container *ngIf="!!kanbans.length; else nodata">
+    <div *ngFor="let kanban of kanbans" preview>
+      <span>{{kanban.title}}</span>
+      <a routerLink="/kanbans/{{kanban.id}}" overlay>Open</a>
+    </div>
+
+    <app-add-kanban [kanban]="kanban" (saved)="load()"></app-add-kanban>
+  </ng-container>
+
+</jnt-stack>
+
+<ng-template #nodata>
+  <span *ngIf="!loading; else loadingTemplate">No lists</span>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div *ngFor="let i of 3 | mockArray">
+    <jnt-block [width]="ui.width.fluid" [padding]="ui.padding.small" block>
+      <jnt-skeleton [lines]="5"></jnt-skeleton>
+    </jnt-block>
+  </div>
+</ng-template>
+
+<div spin *ngIf="kanbans.length && loading">
+  <jnt-spinner></jnt-spinner>
 </div>
-<div preview new></div>
