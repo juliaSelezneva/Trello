@@ -1,0 +1,18 @@
+<jnt-form [loading]="loading"
+          [layout]="ui.form.layout.horizontal" [formGroup]="editForm" (submitted)="edit()" jntValidation>
+
+  <jnt-form-item>
+    <jnt-col [span]="3">
+      <jnt-form-label for="title">Title</jnt-form-label>
+    </jnt-col>
+    <jnt-col [span]="9">
+      <jnt-form-control name="title">
+        <jnt-input formControlName="title" placeholder="Title"></jnt-input>
+        <jnt-form-message [type]="ui.form.validators.typeError.required">
+          This field is required
+        </jnt-form-message>
+      </jnt-form-control>
+    </jnt-col>
+  </jnt-form-item>
+
+</jnt-form>

@@ -1,3 +1,5 @@
+<h3 *ngIf="!!kanban; else titleLoading">{{kanban.title}}</h3>
+
 <jnt-stack [type]="ui.stack.type.horizontal"
            cdkDropList
            cdkDropListOrientation="horizontal"
@@ -11,6 +13,12 @@
   </ng-container>
   <app-add-list (added)="load()" [list]="list" [kanban]="kanban"></app-add-list>
 </jnt-stack>
+
+<ng-template #titleLoading>
+  <div titleLoading>
+    <jnt-skeleton [lines]="1"></jnt-skeleton>
+  </div>
+</ng-template>
 
 <ng-template #nodata>
   <span *ngIf="!loading; else loadingTemplate">No lists</span>

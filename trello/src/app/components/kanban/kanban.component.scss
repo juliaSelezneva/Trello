@@ -6,6 +6,14 @@
   position: relative;
 }
 
+h3 {
+  color: $primary-color;
+}
+
+[titleLoading] {
+  margin-bottom: $gutter-big;
+}
+
 [block] {
   min-width: 250px;
   background-color: $primary-color-light-70;

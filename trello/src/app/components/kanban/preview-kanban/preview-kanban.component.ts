@@ -4,6 +4,7 @@ import { Kanban } from '../../../models/kanban';
 import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
 import { KanbanService } from '../../../services/kanban.service';
 import { finalize } from 'rxjs/operators';
+import { EditTicketComponent } from '../../tickets/edit-ticket/edit-ticket.component';
 
 @Component({
   selector: 'app-preview-kanban',
@@ -27,6 +28,27 @@ export class PreviewKanbanComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  // openModal() {
+  //   const component = this.cfr.resolveComponentFactory(EditTicketComponent).create(this.injector);
+  //   component.instance.ticket = this.ticket;
+  //   component.instance.saved.subscribe(ticket => {
+  //     this.modalService.close();
+  //     this.ticket = ticket;
+  //   });
+  //   component.instance.closed.subscribe(() => {
+  //     this.modalService.close();
+  //   });
+  //   const options = new ModalOptions({
+  //     title: {
+  //       text: 'Edit ticket',
+  //       icon: UI.icons.font.edit
+  //     },
+  //     maxHeight: '1024px',
+  //     maxWidth: '800px'
+  //   });
+  //   this.modalService.open(component, null, options);
+  // }
 
   confirm() {
     const component = this.cfr.resolveComponentFactory(ConfirmDeleteComponent).create(this.injector);

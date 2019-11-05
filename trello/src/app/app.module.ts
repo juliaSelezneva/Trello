@@ -21,6 +21,7 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
 import { BoardComponent } from './components/board/board.component';
 import { AddKanbanComponent } from './components/kanban/add-kanban/add-kanban.component';
 import { PreviewKanbanComponent } from './components/kanban/preview-kanban/preview-kanban.component';
+import { EditKanbanComponent } from './components/kanban/edit-kanban/edit-kanban.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PreviewKanbanComponent } from './components/kanban/preview-kanban/previ
     BoardComponent,
     AddKanbanComponent,
     PreviewKanbanComponent,
+    EditKanbanComponent,
   ],
   imports: [
     BrowserModule,

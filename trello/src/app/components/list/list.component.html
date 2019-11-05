@@ -12,20 +12,6 @@
     </div>
   </jnt-form>
   <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [gutter]="ui.gutter.tiny">
-    <ng-container *ngIf="tickets.length > 1">
-      <jnt-button [icon]="ui.icons.font.arrowLeft"
-                  [outline]="ui.outline.ghost"
-                  [size]="ui.sizes.tiny"
-                  [scheme]="ui.schemes.secondary"
-                  up (click)="sort(sortType.up)">
-      </jnt-button>
-      <jnt-button [icon]="ui.icons.font.arrowLeft"
-                  [outline]="ui.outline.ghost"
-                  [size]="ui.sizes.tiny"
-                  [scheme]="ui.schemes.secondary"
-                  down (click)="sort(sortType.down)">
-      </jnt-button>
-    </ng-container>
     <jnt-button [icon]="ui.icons.delete"
                 [outline]="ui.outline.ghost"
                 [size]="ui.sizes.tiny"
