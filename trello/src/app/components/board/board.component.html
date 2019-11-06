@@ -3,7 +3,7 @@
 <jnt-stack [type]="ui.stack.type.horizontal" [align]="ui.flex.align.stretch">
 
   <ng-container *ngIf="!!kanbans.length; else nodata">
-     <app-preview-kanban *ngFor="let kanban of kanbans" [kanban]="kanban" (deleted)="load()"></app-preview-kanban>
+     <app-preview-kanban *ngFor="let kanban of kanbans" [kanban]="kanban" (deleted)="load()" (saved)="load()"></app-preview-kanban>
   </ng-container>
 
   <app-add-kanban [kanban]="kanban" (saved)="load()"></app-add-kanban>

@@ -15,4 +15,9 @@
     </jnt-col>
   </jnt-form-item>
 
+  <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.center">
+    <jnt-button text="OK" [type]="ui.form.button.type.submit" [loading]="loading"></jnt-button>
+    <jnt-button text="Cancel" (click)="close()"></jnt-button>
+  </jnt-stack>
+
 </jnt-form>

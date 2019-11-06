@@ -4,7 +4,7 @@ import { Kanban } from '../../../models/kanban';
 import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
 import { KanbanService } from '../../../services/kanban.service';
 import { finalize } from 'rxjs/operators';
-import { EditTicketComponent } from '../../tickets/edit-ticket/edit-ticket.component';
+import { EditKanbanComponent } from '../edit-kanban/edit-kanban.component';
 
 @Component({
   selector: 'app-preview-kanban',
@@ -19,6 +19,7 @@ export class PreviewKanbanComponent implements OnInit {
   @Input() kanban: Kanban;
 
   @Output() deleted = new EventEmitter<any>();
+  @Output() saved = new EventEmitter<Kanban>();
 
   constructor(private modalService: ModalService,
               private injector: Injector,
@@ -29,26 +30,26 @@ export class PreviewKanbanComponent implements OnInit {
   ngOnInit() {
   }
 
-  // openModal() {
-  //   const component = this.cfr.resolveComponentFactory(EditTicketComponent).create(this.injector);
-  //   component.instance.ticket = this.ticket;
-  //   component.instance.saved.subscribe(ticket => {
-  //     this.modalService.close();
-  //     this.ticket = ticket;
-  //   });
-  //   component.instance.closed.subscribe(() => {
-  //     this.modalService.close();
-  //   });
-  //   const options = new ModalOptions({
-  //     title: {
-  //       text: 'Edit ticket',
-  //       icon: UI.icons.font.edit
-  //     },
-  //     maxHeight: '1024px',
-  //     maxWidth: '800px'
-  //   });
-  //   this.modalService.open(component, null, options);
-  // }
+  openModal() {
+    const component = this.cfr.resolveComponentFactory(EditKanbanComponent).create(this.injector);
+    component.instance.kanban = this.kanban;
+    component.instance.saved.subscribe((kanban) => {
+      this.kanban = kanban;
+      this.modalService.close();
+    });
+    component.instance.closed.subscribe(() => {
+      this.modalService.close();
+    });
+    const options = new ModalOptions({
+      title: {
+        text: 'Edit kanban',
+        icon: UI.icons.font.edit
+      },
+      maxHeight: '1024px',
+      maxWidth: '800px'
+    });
+    this.modalService.open(component, null, options);
+  }
 
   confirm() {
     const component = this.cfr.resolveComponentFactory(ConfirmDeleteComponent).create(this.injector);

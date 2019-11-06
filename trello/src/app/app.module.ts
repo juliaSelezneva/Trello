@@ -56,7 +56,8 @@ import { EditKanbanComponent } from './components/kanban/edit-kanban/edit-kanban
   entryComponents: [
     EditTicketComponent,
     ConfirmDeleteComponent,
-    AddKanbanComponent
+    AddKanbanComponent,
+    EditKanbanComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
