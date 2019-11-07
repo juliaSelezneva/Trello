@@ -1,7 +1,7 @@
 <jnt-block *ngIf="!!ticket" [padding]="ui.padding.small" [width]="ui.width.fluid">
   <jnt-stack [gutter]="ui.gutter.small" [align]="ui.flex.align.stretch">
     <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between" [wrap]="ui.flex.wrap.noWrap">
-      <jnt-link [title]="ticket.title" [source]="['/tickets/', ticket.id]"></jnt-link>
+      <jnt-link [title]="ticket.title" [source]="['tickets', ticket.id]"></jnt-link>
 
       <jnt-dropdown>
         <ng-template #trigger let-action="trigger">

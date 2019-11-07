@@ -13,22 +13,18 @@ import { Ticket } from '../../../models/ticket';
 export class TicketDetailComponent implements OnInit {
 
   ui = UI;
-
   ticket: Ticket;
-
-  getTicket(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.ticketService.getTicket(id)
-      .subscribe(ticket => this.ticket = ticket);
-  }
 
   constructor(private listService: ListService,
               private ticketService: TicketService,
               private route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getTicket();
   }
 
+  getTicket(): void {
+    this.route.data.subscribe(data => this.ticket = data.ticket);
+  }
 }

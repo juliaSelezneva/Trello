@@ -38,17 +38,15 @@ export class KanbanComponent implements OnInit {
 
   load(): void {
     this.loading = true;
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.kanbanService.getKanban(id)
-      .subscribe(kanban => {
-        this.kanban = kanban;
-        this.listService.getLists(this.kanban.id)
-          .pipe(finalize(() => this.loading = false))
-          .subscribe(lists => {
-            this.lists = lists.sort((a, b) => compareUp(a, b, 'order'));
-            this.connections = lists.map(list => `list_${list.id}`);
-          });
-      });
+    this.route.data.subscribe(data => {
+      this.kanban = data.kanban;
+      this.listService.getLists(this.kanban.id)
+        .pipe(finalize(() => this.loading = false))
+        .subscribe(lists => {
+          this.lists = lists.sort((a, b) => compareUp(a, b, 'order'));
+          this.connections = lists.map(list => `list_${list.id}`);
+        });
+    });
   }
 
   track(index, list: List) {

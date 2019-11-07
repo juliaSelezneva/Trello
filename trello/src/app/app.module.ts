@@ -22,8 +22,8 @@ import { KanbansListComponent } from './components/kanbans/kanbans-list/kanbans-
 import { AddKanbanComponent } from './components/kanbans/add-kanban/add-kanban.component';
 import { PreviewKanbanComponent } from './components/kanbans/preview-kanban/preview-kanban.component';
 import { EditKanbanComponent } from './components/kanbans/edit-kanban/edit-kanban.component';
-import { KanbansComponent } from './components/kanbans/kanbans.component';
 import { HomeComponent } from './components/home/home.component';
+import { OutletComponent } from './components/shared/outlet/outlet.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +40,8 @@ import { HomeComponent } from './components/home/home.component';
     AddKanbanComponent,
     PreviewKanbanComponent,
     EditKanbanComponent,
-    KanbansComponent,
     HomeComponent,
+    OutletComponent
   ],
   imports: [
     BrowserModule,

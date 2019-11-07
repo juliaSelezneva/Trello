@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Data, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { KanbansListComponent } from './components/kanbans/kanbans-list/kanbans-list.component';
 import { KanbanComponent } from './components/kanbans/kanban/kanban.component';
-import { Kanban } from './models/kanban';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
-import { KanbansComponent } from './components/kanbans/kanbans.component';
+import { KanbanResolver } from './resolvers/kanban';
+import { TicketResolver } from './resolvers/ticket';
+import { OutletComponent } from './components/shared/outlet/outlet.component';
 
-export function getKanban(data: Kanban) {
-  return data.title;
+export function getKanban(data: Data) {
+  return data.kanban.title;
+}
+
+export function getTicket(data: Data) {
+  return data.ticket.title;
 }
 
 const routes: Routes = [
@@ -19,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'kanbans',
-    component: KanbansComponent,
+    component: OutletComponent,
     data: {breadcrumb: 'Kanbans'},
     children: [
       {
@@ -27,10 +32,29 @@ const routes: Routes = [
         component: KanbansListComponent,
       },
       {
-        path: ':id',
+        path: ':kanban',
         data: {breadcrumb: getKanban},
-        component: KanbanComponent
-      }
+        component: OutletComponent,
+        resolve: {kanban: KanbanResolver},
+        children: [
+          {
+            path: '',
+            component: KanbanComponent,
+          },
+          {
+            path: 'tickets',
+            component: OutletComponent,
+            children: [
+              {
+                path: ':ticket',
+                data: {breadcrumb: getTicket},
+                component: TicketDetailComponent,
+                resolve: {ticket: TicketResolver}
+              }
+            ]
+          },
+        ]
+      },
     ],
   },
   {
@@ -38,11 +62,6 @@ const routes: Routes = [
     data: {breadcrumb: 'Home'},
     component: HomeComponent
   },
-
-  {
-    path: 'tickets/:id',
-    component: TicketDetailComponent
-  }
 ];
 
 @NgModule({

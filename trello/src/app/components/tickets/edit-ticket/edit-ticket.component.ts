@@ -1,5 +1,5 @@
 import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ListService } from '../../../services/list.service';
 import { TicketService } from '../../../services/ticket.service';
 import { Ticket } from '../../../models/ticket';
@@ -43,7 +43,7 @@ export class EditTicketComponent {
     title: [[], Validators.required],
     order: [],
     estimate: [],
-    dueDate: [],
+    dueDate: [new Date()],
     labels: [],
     list: []
   });
