@@ -4,7 +4,6 @@ import { Signals, SignalType } from './in-memory-data.service';
 import { Observable } from 'rxjs';
 import { Kanban } from '../models/kanban';
 import { finalize, map } from 'rxjs/operators';
-import { List } from '../models/list';
 
 @Injectable({providedIn: 'root'})
 

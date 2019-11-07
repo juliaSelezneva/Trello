@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UI } from 'junte-ui';
-import { ListService } from '../../services/list.service';
-import { List } from '../../models/list';
-import { Ticket } from '../../models/ticket';
+import { ListService } from '../../../services/list.service';
+import { List } from '../../../models/list';
+import { Ticket } from '../../../models/ticket';
 import { finalize } from 'rxjs/operators';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { compareUp } from '../../utils/sort';
-import { Kanban } from '../../models/kanban';
-import { KanbanService } from '../../services/kanban.service';
+import { compareUp } from '../../../utils/sort';
+import { Kanban } from '../../../models/kanban';
+import { KanbanService } from '../../../services/kanban.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

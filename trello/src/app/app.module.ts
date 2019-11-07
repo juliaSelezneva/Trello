@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JunteUiModule } from 'junte-ui';
-import { KanbanComponent } from './components/kanban/kanban.component';
+import { KanbanComponent } from './components/kanbans/kanban/kanban.component';
 import { ListComponent } from './components/list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,10 +18,12 @@ import { AddListComponent } from './components/list/add-list/add-list.component'
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
 import { ArrayPipesModule } from './pipes/array-pipes.module';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
-import { BoardComponent } from './components/board/board.component';
-import { AddKanbanComponent } from './components/kanban/add-kanban/add-kanban.component';
-import { PreviewKanbanComponent } from './components/kanban/preview-kanban/preview-kanban.component';
-import { EditKanbanComponent } from './components/kanban/edit-kanban/edit-kanban.component';
+import { KanbansListComponent } from './components/kanbans/kanbans-list/kanbans-list.component';
+import { AddKanbanComponent } from './components/kanbans/add-kanban/add-kanban.component';
+import { PreviewKanbanComponent } from './components/kanbans/preview-kanban/preview-kanban.component';
+import { EditKanbanComponent } from './components/kanbans/edit-kanban/edit-kanban.component';
+import { KanbansComponent } from './components/kanbans/kanbans.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -34,10 +36,12 @@ import { EditKanbanComponent } from './components/kanban/edit-kanban/edit-kanban
     AddListComponent,
     AddTicketComponent,
     ConfirmDeleteComponent,
-    BoardComponent,
+    KanbansListComponent,
     AddKanbanComponent,
     PreviewKanbanComponent,
     EditKanbanComponent,
+    KanbansComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,7 @@ import { EditKanbanComponent } from './components/kanban/edit-kanban/edit-kanban
     DragDropModule,
     ArrayPipesModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false, delay: 2000 }
+      InMemoryDataService, { dataEncapsulation: false }
     )
   ],
   entryComponents: [

@@ -1,15 +1,48 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { KanbanComponent } from './components/kanban/kanban.component';
+import { HomeComponent } from './components/home/home.component';
+import { KanbansListComponent } from './components/kanbans/kanbans-list/kanbans-list.component';
+import { KanbanComponent } from './components/kanbans/kanban/kanban.component';
+import { Kanban } from './models/kanban';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
-import { BoardComponent } from './components/board/board.component';
+import { KanbansComponent } from './components/kanbans/kanbans.component';
+
+export function getKanban(data: Kanban) {
+  return data.title;
+}
 
 const routes: Routes = [
-  {path: 'board', component: BoardComponent},
-  {path: 'kanbans/:id', component: KanbanComponent},
-  {path: 'tickets/:id', component: TicketDetailComponent},
-  {path: '', redirectTo: '/board', pathMatch: 'full'},
-  {path: '**', redirectTo: '/board'}
+  {
+    path: '',
+    redirectTo: 'kanbans',
+    pathMatch: 'full'
+  },
+  {
+    path: 'kanbans',
+    component: KanbansComponent,
+    data: {breadcrumb: 'Kanbans'},
+    children: [
+      {
+        path: '',
+        component: KanbansListComponent,
+      },
+      {
+        path: ':id',
+        data: {breadcrumb: getKanban},
+        component: KanbanComponent
+      }
+    ],
+  },
+  {
+    path: 'home',
+    data: {breadcrumb: 'Home'},
+    component: HomeComponent
+  },
+
+  {
+    path: 'tickets/:id',
+    component: TicketDetailComponent
+  }
 ];
 
 @NgModule({
@@ -20,17 +53,3 @@ export class AppRoutingModule {
 }
 
 
-// {
-//   path: 'kanbans',
-//     component: KanbansComponent,
-//   children: [
-//   {
-//     path: '',
-//     component: KanbansListComponent,
-//   },
-//   {
-//     path: ':id',
-//     component: KanbanComponent,
-//   }
-// ]
-// }
