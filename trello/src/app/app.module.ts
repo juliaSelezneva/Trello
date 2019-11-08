@@ -17,7 +17,7 @@ import { EditTicketComponent } from './components/tickets/edit-ticket/edit-ticke
 import { AddListComponent } from './components/list/add-list/add-list.component';
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
 import { ArrayPipesModule } from './pipes/array-pipes.module';
-import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { ConfirmDeleteComponent } from './components/shared/confirm-delete/confirm-delete.component';
 import { KanbansListComponent } from './components/kanbans/kanbans-list/kanbans-list.component';
 import { AddKanbanComponent } from './components/kanbans/add-kanban/add-kanban.component';
 import { PreviewKanbanComponent } from './components/kanbans/preview-kanban/preview-kanban.component';

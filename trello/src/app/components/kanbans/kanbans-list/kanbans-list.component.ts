@@ -3,7 +3,7 @@ import { ModalOptions, ModalService, UI } from 'junte-ui';
 import { Kanban } from '../../../models/kanban';
 import { finalize } from 'rxjs/operators';
 import { KanbanService } from '../../../services/kanban.service';
-import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
+import { ConfirmDeleteComponent } from '../../shared/confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-board',

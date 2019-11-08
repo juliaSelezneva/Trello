@@ -6,7 +6,7 @@ import { Ticket } from '../../../models/ticket';
 import { finalize } from 'rxjs/operators';
 import { ListService } from '../../../services/list.service';
 import { TicketService } from '../../../services/ticket.service';
-import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
+import { ConfirmDeleteComponent } from '../../shared/confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-ticket',

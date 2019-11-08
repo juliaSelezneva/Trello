@@ -1,8 +1,11 @@
-<jnt-block *ngIf="ticket" [padding]="ui.padding.normal">
-  <jnt-stack [type]="ui.stack.type.horizontal">
-    <div>{{ticket.title}}</div>
-    <div>{{ticket.estimate}}</div>
-    <div>{{ticket.dueDate | date: 'd MMM'}}</div>
+<jnt-stack>
+  <jnt-stack [type]="ui.stack.type.horizontal" [align]="ui.flex.align.center">
+    <h3>{{ticket.title}}</h3>
+    <jnt-label *ngFor="let label of ticket.labels" [label]="label" [color]="ui.colors.greenDark"></jnt-label>
   </jnt-stack>
+  <div>Estimate: {{ticket.estimate}}</div>
+  <div>DueDate: {{ticket.dueDate | date: 'd MMM'}}</div>
+</jnt-stack>
 
-</jnt-block>
+
+

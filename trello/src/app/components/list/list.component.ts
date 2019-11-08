@@ -7,7 +7,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { TicketService } from '../../services/ticket.service';
 import { Ticket } from '../../models/ticket';
 import { finalize } from 'rxjs/operators';
-import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { ConfirmDeleteComponent } from '../shared/confirm-delete/confirm-delete.component';
 import { compareDown, compareUp, SortType } from '../../utils/sort';
 
 @Component({

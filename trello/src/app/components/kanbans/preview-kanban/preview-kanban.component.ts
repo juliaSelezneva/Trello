@@ -1,7 +1,7 @@
 import { Component, ComponentFactoryResolver, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { ModalOptions, ModalService, UI } from 'junte-ui';
 import { Kanban } from '../../../models/kanban';
-import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
+import { ConfirmDeleteComponent } from '../../shared/confirm-delete/confirm-delete.component';
 import { KanbanService } from '../../../services/kanban.service';
 import { finalize } from 'rxjs/operators';
 import { EditKanbanComponent } from '../edit-kanban/edit-kanban.component';
