@@ -30,7 +30,7 @@
     "gulp-sass": "^4.0.2",
     "junte-encapsuler": "0.0.31",
     "junte-ui": "0.0.304",
-    "lodash-es": "4.17.15",
+    "lodash-es": "4.17.21",
     "map-stream": "0.0.7",
     "minimist": "1.2.0",
     "node-html-parser": "1.1.16",
